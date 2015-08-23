@@ -12,7 +12,26 @@ Add the following configuration to your `build.gradle`:
     dependencies {
       classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
     }
+    
+## Usage
 
+### Create a Release
+
+    GitHubClient client = new GitHubClient();
+    client.setOAuth2Token("GITHUB_OATH_TOKEN");
+    IRepositoryIdProvider repositoryIdProvider = RepositoryId.create("REPOSITORY_OWNER", "REPOSITORY_NAME");
+    
+	Release release = new Release();
+	release.setBody("RELEASE_NOTES");
+	release.setDraft(false);
+	release.setName("RELEASE_NAME");
+	release.setTagName("RELEASE_TAG_NAME");
+	release.setPrerelease(false);
+	release.setTargetCommitish("BRANCH_NAME");
+
+	ReleaseService releaseService = new ReleaseService(client);
+	releaseService.createRelease(repositoryIdProvider, release);
+    
 ## Donations
 Help us to continue with this project:
 
