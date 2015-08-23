@@ -10,9 +10,9 @@ dependencies {
 	compile 'com.google.code.gson:gson:2.2.2'
 }
 
-version = '0.8.0-SNAPSHOT'
+version = '0.9.0-SNAPSHOT'
 group = 'com.jdroidframework'
-ext.projectName = 'jdroid-github'
+ext.projectName = 'jdroid-java-github-connector'
 ext.description = 'Java Connector for GitHub API'
 
 ext.packaging = jar
@@ -66,13 +66,13 @@ afterEvaluate {
 						}
 					}
 					scm {
-						connection 'scm:git:git@github.com:maxirosson/jdroid-github.git'
-						developerConnection 'scm:git:git@github.com:maxirosson/jdroid-github.git'
-						url 'git@github.com:maxirosson/jdroid-github.git'
+						connection 'scm:git:git@github.com:maxirosson/jdroid-java-github-connector.git'
+						developerConnection 'scm:git:git@github.com:maxirosson/jdroid-java-github-connector.git'
+						url 'git@github.com:maxirosson/jdroid-java-github-connector.git'
 					}
 					issueManagement {
 						system 'GitHub'
-						url 'https://github.com/maxirosson/jdroid-github/issues'
+						url 'https://github.com/maxirosson/jdroid-java-github-connector/issues'
 					}
 				}
 			}
