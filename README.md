@@ -5,13 +5,13 @@ Java Connector for GitHub API
 
 Add the following configuration to your `build.gradle`:
 
-  repositories {
-    mavenCentral()
-  }
+    repositories {
+      mavenCentral()
+    }
   
-  dependencies {
-    classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
-  }
+    dependencies {
+      classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
+    }
 
 ## Donations
 Help us to continue with this project:
