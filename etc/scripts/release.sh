@@ -109,13 +109,3 @@ cmd="./gradlew clean uploadArchives -PSNAPSHOT=false -PLOCAL_UPLOAD=false"
 echo "Executing the following command"
 echo "${cmd}"
 eval "${cmd}"
-
-
-# ************************
-# Publish the Gradle Plugin to the Portal
-# ************************
-
-cd $PROJECT_HOME
-./gradlew clean publishPlugins --configure-on-demand -PSNAPSHOT=false -PSIGNING_ENABLED=false
-
-read -p "Verify the plugins on the Portal [https://plugins.gradle.org/search?term=jdroid] and press [Enter] key to continue..."
