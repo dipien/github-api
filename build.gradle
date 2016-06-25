@@ -218,3 +218,10 @@ public void createRelease(GitHubClient client, IRepositoryIdProvider repositoryI
 	ReleaseService releaseService = new ReleaseService(client);
 	releaseService.createRelease(repositoryIdProvider, release);
 }
+
+
+if (JavaVersion.current().isJava8Compatible()) {
+	tasks.withType(Javadoc) {
+		options.addStringOption('Xdoclint:none', '-quiet')
+	}
+}
