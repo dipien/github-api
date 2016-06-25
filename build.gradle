@@ -2,6 +2,33 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
+ext.projectName = 'jdroid-java-github'
+description = 'Java Connector for GitHub API'
+group = 'com.jdroidframework'
+ext.packaging = jar
+
+Boolean isSnapshot = getBooleanProp('SNAPSHOT', true)
+
+ext.VERSION_MAJOR = 0
+ext.VERSION_MINOR = 9
+ext.VERSION_PATCH = 1
+ext.VERSION_CLASSIFIER = isSnapshot ? "SNAPSHOT" : null
+
+project.version = "${ext.VERSION_MAJOR}.${ext.VERSION_MINOR}.${ext.VERSION_PATCH}"
+if (ext.VERSION_CLASSIFIER != null && !ext.VERSION_CLASSIFIER.isEmpty()) {
+	project.version = project.version + "-" + ext.VERSION_CLASSIFIER
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -9,13 +36,6 @@ repositories {
 dependencies {
 	compile 'com.google.code.gson:gson:2.2.2'
 }
-
-version = '0.9.2-SNAPSHOT'
-group = 'com.jdroidframework'
-ext.projectName = 'jdroid-java-github'
-ext.description = 'Java Connector for GitHub API'
-
-ext.packaging = jar
 
 task javadocJar(type: Jar) {
 	classifier = 'javadoc'
@@ -31,83 +51,170 @@ artifacts {
 	archives javadocJar, sourcesJar
 }
 
-afterEvaluate {
-	uploadArchives {
-		repositories {
-			mavenDeployer {
+Boolean localUpload = getBooleanProp('LOCAL_UPLOAD', true)
+def localMavenRepo = getProp('LOCAL_MAVEN_REPO')
 
-				beforeDeployment { MavenDeployment deployment ->
-					signing.signPom(deployment)
-				}
+if (localUpload && localMavenRepo == null) {
+	project.logger.warn("LOCAL_MAVEN_REPO property is not defined. Skipping uploadArchives configuration")
+} else {
+	afterEvaluate {
+		uploadArchives {
+			repositories {
+				mavenDeployer {
 
-				def localUpload = getProp('LOCAL_UPLOAD')
-				if (localUpload != null && localUpload == 'true') {
-					repository(url: uri(getProp('LOCAL_MAVEN_REPO')))
-				} else {
-					repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-						authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+					beforeDeployment { MavenDeployment deployment ->
+						signing.signPom(deployment)
 					}
-					snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-						authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-					}
-				}
 
-				pom.project {
-					name project.ext.projectName
-					description project.description
-					packaging project.packaging
-					url 'http://www.jdroidframework.com'
-					inceptionYear '2011'
-					organization {
-						name 'Jdroid'
-						url 'http://www.jdroidframework.com'
-					}
-					licenses {
-						license {
-							name 'The Apache License, Version 2.0'
-							url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-							distribution 'repo'
+					if (localUpload) {
+						repository(url: project.uri(localMavenRepo))
+					} else {
+						repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+							authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+						}
+						snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+							authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
 						}
 					}
-					developers {
-						developer {
-							name 'Maxi Rosson'
-							email 'jdroidsoft@gmail.com'
-							roles {
-								role 'architect'
-								role 'developer'
+
+					pom.project {
+						name project.ext.projectName
+						description project.description
+						packaging project.packaging
+						url 'http://www.jdroidframework.com'
+						inceptionYear '2011'
+						organization {
+							name 'Jdroid'
+							url 'http://www.jdroidframework.com'
+						}
+						licenses {
+							license {
+								name 'The Apache License, Version 2.0'
+								url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+								distribution 'repo'
 							}
 						}
-					}
-					scm {
-						connection 'scm:git:git@github.com:maxirosson/jdroid-java-github-connector.git'
-						developerConnection 'scm:git:git@github.com:maxirosson/jdroid-java-github-connector.git'
-						url 'git@github.com:maxirosson/jdroid-java-github-connector.git'
-					}
-					issueManagement {
-						system 'GitHub'
-						url 'https://github.com/maxirosson/jdroid-java-github-connector/issues'
+						developers {
+							developer {
+								name 'Maxi Rosson'
+								email 'jdroidframework@gmail.com'
+								roles {
+									role 'architect'
+									role 'developer'
+								}
+							}
+						}
+						scm {
+							connection 'scm:git:git@github.com:maxirosson/jdroid-java-github.git'
+							developerConnection 'scm:git:git@github.com:maxirosson/jdroid-java-github.git'
+							url 'git@github.com:maxirosson/jdroid-java-github.git'
+						}
+						issueManagement {
+							system 'GitHub'
+							url 'https://github.com/maxirosson/jdroid-java-github/issues'
+						}
 					}
 				}
 			}
 		}
 	}
-
 }
 
-signing {
-	required { gradle.taskGraph.hasTask("uploadArchives") }
-	sign configurations.archives
+if (getBooleanProp('SIGNING_ENABLED', true)) {
+	signing {
+		required { !isSnapshot && gradle.taskGraph.hasTask("uploadArchives") }
+		sign configurations.archives
+	}
 }
 
 def getRepositoryUsername() {
-	return getProp('NEXUS_USERNAME')
+	return getProp('JDROID_NEXUS_USERNAME')
 }
 
 def getRepositoryPassword() {
-	getProp('NEXUS_PASSWORD')
+	return getProp('JDROID_NEXUS_PASSWORD')
 }
 
 public def getProp(String propertyName) {
 	return project.hasProperty(propertyName) ? project.ext.get(propertyName) : System.getenv(propertyName)
+}
+
+public Boolean getBooleanProp(String propertyName, Boolean defaultValue) {
+	def value = getProp(propertyName)
+	if (value == null) {
+		return defaultValue
+	} else if (value == 'true') {
+		return true
+	} else if (value == 'false') {
+		return false
+	} else {
+		throw new GradleException('Invalid Boolean value: ' + value)
+	}
+}
+
+task printVersion << {
+	println version
+}
+
+import com.jdroid.github.IRepositoryIdProvider;
+import com.jdroid.github.Milestone;
+import com.jdroid.github.Release;
+import com.jdroid.github.RepositoryId;
+import com.jdroid.github.client.GitHubClient;
+import com.jdroid.github.service.MilestoneService;
+import com.jdroid.github.service.ReleaseService;
+
+task closeGitHubMilestone << {
+
+	GitHubClient client = new com.jdroid.github.client.GitHubClient();
+	client.setSerializeNulls(false);
+	client.setOAuth2Token(getProp('GITHUB_OATH_TOKEN'));
+
+	IRepositoryIdProvider repositoryIdProvider = RepositoryId.create(getProp('REPOSITORY_OWNER'), getProp('REPOSITORY_NAME'));
+
+	closeMilestone(client, repositoryIdProvider, "v${version}");
+}
+
+public void closeMilestone(GitHubClient client, IRepositoryIdProvider repositoryIdProvider, String milestoneTitle) throws IOException {
+
+	MilestoneService milestoneService = new MilestoneService(client);
+	for (Milestone each : milestoneService.getMilestones(repositoryIdProvider, "open")) {
+		if (each.getTitle().equals(milestoneTitle)) {
+
+			Milestone newMilestone = new Milestone();
+			newMilestone.setNumber(each.getNumber());
+			newMilestone.setTitle(each.getTitle());
+			newMilestone.setDescription(each.getDescription());
+			newMilestone.setDueOn(new Date());
+			newMilestone.setState("closed");
+			milestoneService.editMilestone(repositoryIdProvider, newMilestone);
+			break;
+		}
+	}
+}
+
+task createGitHubRelease << {
+	GitHubClient client = new GitHubClient();
+	client.setSerializeNulls(false);
+	client.setOAuth2Token(getProp('GITHUB_OATH_TOKEN'));
+
+	IRepositoryIdProvider repositoryIdProvider = RepositoryId.create(getProp('REPOSITORY_OWNER'), getProp('REPOSITORY_NAME'));
+
+	def releaseNotesFile = project.file("./etc/releaseNotes.txt")
+
+	createRelease(client, repositoryIdProvider, "v${version}", releaseNotesFile.getText());
+}
+
+public void createRelease(GitHubClient client, IRepositoryIdProvider repositoryIdProvider, String name, String body) throws IOException {
+
+	Release release = new Release();
+	release.setBody(body);
+	release.setDraft(false);
+	release.setName(name);
+	release.setTagName(name);
+	release.setPrerelease(false);
+	release.setTargetCommitish("production");
+
+	ReleaseService releaseService = new ReleaseService(client);
+	releaseService.createRelease(repositoryIdProvider, release);
 }

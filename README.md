@@ -1,5 +1,4 @@
-# Java Github Connector
-Java Connector for GitHub API
+# Java Connector for GitHub API
 
 ## Setup 
 
@@ -10,7 +9,7 @@ Add the following configuration to your `build.gradle`:
     }
   
     dependencies {
-      classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
+      classpath 'com.jdroidframework:jdroid-java-github:0.9.1'
     }
     
 ## Usage
