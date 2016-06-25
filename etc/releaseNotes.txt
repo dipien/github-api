@@ -1,1 +1,3 @@
+**Implemented enhancements:**
 
+- Changed name to jdroid-java-github [\#1](https://github.com/maxirosson/jdroid-java-github/issues/1)
