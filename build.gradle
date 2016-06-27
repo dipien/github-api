@@ -2,16 +2,13 @@ ext.VERSION_MAJOR = 0
 ext.VERSION_MINOR = 9
 ext.VERSION_PATCH = 2
 
+ext.JDROID_GITHUB_REPOSITORY_OWNER = 'maxirosson'
+ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
+
 apply plugin: 'com.jdroid.java.library'
 apply plugin: 'com.jdroid.component.builder'
 
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-ext.projectName = 'jdroid-java-github'
 description = 'Java Connector for GitHub API'
-group = 'com.jdroidframework'
-ext.packaging = jar
 
 buildscript {
 	repositories {
@@ -25,7 +22,6 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'com.jdroidframework:jdroid-java-github-connector:0.9.0'
 		classpath 'com.jdroidframework:jdroid-gradle-plugin:0.9.6-SNAPSHOT'
 		classpath 'com.jdroidframework:jdroid-internal:0.1.0-SNAPSHOT'
 	}
@@ -37,105 +33,4 @@ repositories {
 
 dependencies {
 	compile 'com.google.code.gson:gson:2.2.2'
-}
-
-Boolean localUpload = getBooleanProp('LOCAL_UPLOAD', true)
-def localMavenRepo = getProp('LOCAL_MAVEN_REPO')
-
-if (localUpload && localMavenRepo == null) {
-	project.logger.warn("LOCAL_MAVEN_REPO property is not defined. Skipping uploadArchives configuration")
-} else {
-	afterEvaluate {
-		uploadArchives {
-			repositories {
-				mavenDeployer {
-
-					beforeDeployment { MavenDeployment deployment ->
-						signing.signPom(deployment)
-					}
-
-					if (localUpload) {
-						repository(url: project.uri(localMavenRepo))
-					} else {
-						repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-							authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-						}
-						snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-							authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-						}
-					}
-
-					pom.project {
-						name project.ext.projectName
-						description project.description
-						packaging project.packaging
-						url 'http://www.jdroidframework.com'
-						inceptionYear '2011'
-						organization {
-							name 'Jdroid'
-							url 'http://www.jdroidframework.com'
-						}
-						licenses {
-							license {
-								name 'The Apache License, Version 2.0'
-								url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-								distribution 'repo'
-							}
-						}
-						developers {
-							developer {
-								name 'Maxi Rosson'
-								email 'jdroidframework@gmail.com'
-								roles {
-									role 'architect'
-									role 'developer'
-								}
-							}
-						}
-						scm {
-							connection 'scm:git:git@github.com:maxirosson/jdroid-java-github.git'
-							developerConnection 'scm:git:git@github.com:maxirosson/jdroid-java-github.git'
-							url 'git@github.com:maxirosson/jdroid-java-github.git'
-						}
-						issueManagement {
-							system 'GitHub'
-							url 'https://github.com/maxirosson/jdroid-java-github/issues'
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-if (getBooleanProp('SIGNING_ENABLED', true)) {
-	signing {
-		required { !jdroid.isSnapshot && gradle.taskGraph.hasTask("uploadArchives") }
-		sign configurations.archives
-	}
-}
-
-def getRepositoryUsername() {
-	return getProp('JDROID_NEXUS_USERNAME')
-}
-
-def getRepositoryPassword() {
-	return getProp('JDROID_NEXUS_PASSWORD')
-}
-
-public def getProp(String propertyName) {
-	return project.hasProperty(propertyName) ? project.ext.get(propertyName) : System.getenv(propertyName)
-}
-
-public Boolean getBooleanProp(String propertyName, Boolean defaultValue) {
-	def value = getProp(propertyName)
-	if (value == null) {
-		return defaultValue
-	} else if (value == 'true') {
-		return true
-	} else if (value == 'false') {
-		return false
-	} else {
-		throw new GradleException('Invalid Boolean value: ' + value)
-	}
 }
