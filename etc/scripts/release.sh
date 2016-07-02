@@ -70,20 +70,10 @@ git pull
 VERSION=`./gradlew :printVersion -q --configure-on-demand -PSNAPSHOT=false`
 
 # ************************
-# Close Milestone on GitHub
+# Close Milestone & Upload Release on GitHub
 # ************************
 
-./gradlew :closeGitHubMilestone --configure-on-demand -PSNAPSHOT=false -PREPOSITORY_OWNER=$REPOSITORY_OWNER -PREPOSITORY_NAME=$PROJECT_NAME -PGITHUB_OATH_TOKEN=$GIT_HUB_TOKEN
-
-read -p "Verify that the milestone is closed on Milestones [https://github.com/$REPOSITORY_OWNER/$PROJECT_NAME/milestones] and press [Enter] key to continue..."
-
-# ************************
-# Upload Release on GitHub
-# ************************
-
-./gradlew :createGitHubRelease --configure-on-demand -PSNAPSHOT=false -PREPOSITORY_OWNER=$REPOSITORY_OWNER -PREPOSITORY_NAME=$PROJECT_NAME -PGITHUB_OATH_TOKEN=$GIT_HUB_TOKEN
-
-read -p "Verify that the release is present on Releases [https://github.com/$REPOSITORY_OWNER/$PROJECT_NAME/releases] and press [Enter] key to continue..."
+./gradlew :closeGitHubMilestone :createGitHubRelease --configure-on-demand -PSNAPSHOT=false -PREPOSITORY_OWNER=$REPOSITORY_OWNER -PREPOSITORY_NAME=$PROJECT_NAME -PGITHUB_OATH_TOKEN=$GIT_HUB_TOKEN
 
 # ************************
 # Generate Change Log
