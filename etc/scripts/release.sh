@@ -67,24 +67,11 @@ git stash
 git checkout production
 git pull
 
-VERSION=`./gradlew :printVersion -q --configure-on-demand -PSNAPSHOT=false`
-
 # ************************
 # Close Milestone on GitHub
 # Upload Release on GitHub
 # Generate Change Log
-# ************************
-
-./gradlew :closeGitHubMilestone :createGitHubRelease :generateChangelogTask --configure-on-demand --refresh-dependencies -PSNAPSHOT=false -PREPOSITORY_OWNER=$REPOSITORY_OWNER -PREPOSITORY_NAME=$PROJECT_NAME -PGITHUB_WRITE_TOKEN=$GITHUB_WRITE_TOKEN -PGITHUB_READ_TOKEN=$GITHUB_READ_TOKEN
-
-# ************************
 # Deploy to Sonatype repository
 # ************************
 
-cd $PROJECT_HOME
-
-cmd="./gradlew clean uploadArchives -PSNAPSHOT=false -PLOCAL_UPLOAD=false"
-
-echo "Executing the following command"
-echo "${cmd}"
-eval "${cmd}"
+./gradlew clean :closeGitHubMilestone :createGitHubRelease :generateChangelogTask uploadArchives --configure-on-demand --refresh-dependencies -PSNAPSHOT=false -PLOCAL_UPLOAD=false -PREPOSITORY_OWNER=$REPOSITORY_OWNER -PREPOSITORY_NAME=$PROJECT_NAME -PGITHUB_WRITE_TOKEN=$GITHUB_WRITE_TOKEN -PGITHUB_READ_TOKEN=$GITHUB_READ_TOKEN
