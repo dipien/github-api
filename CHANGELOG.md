@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.9.2](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.2) (2016-07-02)
+[Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.1...v0.9.2)
+
+**Implemented enhancements:**
+
+- Migrate release process to jdroid-internal [\#2](https://github.com/maxirosson/jdroid-java-github/issues/2)
+
 ## [v0.9.1](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.1) (2016-06-25)
 **Implemented enhancements:**
 
