@@ -12,7 +12,7 @@ Add the following configuration to your `build.gradle`:
       classpath 'com.jdroidframework:jdroid-java-github:X.Y.Z'
     }
     
-Replace all the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
+Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
 
 ## Usage
 
