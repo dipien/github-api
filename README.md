@@ -9,9 +9,11 @@ Add the following configuration to your `build.gradle`:
     }
   
     dependencies {
-      classpath 'com.jdroidframework:jdroid-java-github:0.9.1'
+      classpath 'com.jdroidframework:jdroid-java-github:X.Y.Z'
     }
     
+Replace all the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
+
 ## Usage
 
 ### Create a Release
