@@ -1,3 +1,0 @@
-**Implemented enhancements:**
-
-- Migrate release process to jdroid-internal [\#2](https://github.com/maxirosson/jdroid-java-github/issues/2)
