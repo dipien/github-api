@@ -1,5 +1,12 @@
 # Java Connector for GitHub API
 
+## Continuous Integration
+|Branch|Status|
+| ------------- | ------------- |
+|Master|[![Build Status](https://travis-ci.org/maxirosson/jdroid-java-github.svg?branch=master)](https://travis-ci.org/maxirosson/jdroid-java-github)|
+|Staging|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java-github.svg?branch=staging)](https://travis-ci.org/maxirosson/jdroid-java-github)|
+|Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java-github.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid-java-github)|
+
 ## Setup 
 
 Add the following configuration to your `build.gradle`:
