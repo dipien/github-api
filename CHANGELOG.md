@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.9.3](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.3) (2016-07-05)
+[Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.2...v0.9.3)
+
+**Implemented enhancements:**
+
+- Add listReleases support [\#4](https://github.com/maxirosson/jdroid-java-github/issues/4)
+- Add getReleaseByTagName support [\#3](https://github.com/maxirosson/jdroid-java-github/issues/3)
+
 ## [v0.9.2](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.2) (2016-07-02)
 [Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.1...v0.9.2)
 
