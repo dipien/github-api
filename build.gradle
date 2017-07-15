@@ -1,6 +1,6 @@
-ext.VERSION_MAJOR = 0
-ext.VERSION_MINOR = 9
-ext.VERSION_PATCH = 3
+version = '0.9.4'
+
+ext.PROJECT_NAME = 'Jdroid Java GitHub'
 
 ext.JDROID_GITHUB_REPOSITORY_OWNER = 'maxirosson'
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
@@ -12,26 +12,21 @@ description = 'Java Connector for GitHub API'
 
 buildscript {
 	repositories {
-		mavenCentral()
 		jcenter()
-		maven {
-			url "https://oss.sonatype.org/content/repositories/snapshots/"
-		}
 		String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
 		if (localMavenRepo != null) {
-			maven {
-				url localMavenRepo
-			}
+			maven { url localMavenRepo }
 		}
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 	}
 	dependencies {
-		classpath 'com.jdroidframework:jdroid-gradle-plugin:0.9.6'
-		classpath 'com.jdroidframework:jdroid-component-builder:0.1.0'
+		classpath 'com.jdroidframework:jdroid-gradle-java-plugin:0.16.0'
+		classpath 'com.jdroidframework:jdroid-component-builder:0.3.0-SNAPSHOT'
 	}
 }
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 dependencies {
