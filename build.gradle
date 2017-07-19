@@ -13,6 +13,7 @@ description = 'Java Connector for GitHub API'
 buildscript {
 	repositories {
 		jcenter()
+		maven { url "https://plugins.gradle.org/m2/" }
 		String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
 		if (localMavenRepo != null) {
 			maven { url localMavenRepo }
@@ -32,3 +33,5 @@ repositories {
 dependencies {
 	compile 'com.google.code.gson:gson:2.2.2'
 }
+
+// https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core

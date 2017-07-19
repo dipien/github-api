@@ -61,6 +61,7 @@ public class WatcherService extends GitHubService {
 	 * @param start
 	 * @param size
 	 * @return request
+	 * @deprecated use {@link StargazerService#createStargazerRequest}
 	 */
 	protected PagedRequest<User> createWatcherRequest(
 			IRepositoryIdProvider repository, int start, int size) {
@@ -81,6 +82,7 @@ public class WatcherService extends GitHubService {
 	 * @param repository
 	 * @return non-null but possibly empty list of users
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#getStargazers} instead
 	 */
 	public List<User> getWatchers(IRepositoryIdProvider repository)
 			throws IOException {
@@ -94,6 +96,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @param repository
 	 * @return page iterator
+	 * @deprecated use {@link StargazerService#pageStargazers}
 	 */
 	public PageIterator<User> pageWatchers(IRepositoryIdProvider repository) {
 		return pageWatchers(repository, PAGE_SIZE);
@@ -105,6 +108,7 @@ public class WatcherService extends GitHubService {
 	 * @param repository
 	 * @param size
 	 * @return page iterator
+	 * @deprecated use {@link StargazerService#pageStargazers}
 	 */
 	public PageIterator<User> pageWatchers(IRepositoryIdProvider repository,
 			int size) {
@@ -118,6 +122,7 @@ public class WatcherService extends GitHubService {
 	 * @param start
 	 * @param size
 	 * @return page iterator
+	 * @deprecated use {@link StargazerService#pageStargazers}
 	 */
 	public PageIterator<User> pageWatchers(IRepositoryIdProvider repository,
 			int start, int size) {
@@ -133,6 +138,7 @@ public class WatcherService extends GitHubService {
 	 * @param start
 	 * @param size
 	 * @return request
+	 * @deprecated use {@link StargazerService#createStarredRequest}
 	 */
 	protected PagedRequest<Repository> createWatchedRequest(String user,
 			int start, int size) {
@@ -157,6 +163,7 @@ public class WatcherService extends GitHubService {
 	 * @param start
 	 * @param size
 	 * @return request
+	 * @deprecated use {@link StargazerService#createStarredRequest}
 	 */
 	protected PagedRequest<Repository> createWatchedRequest(int start, int size) {
 		PagedRequest<Repository> request = createPagedRequest(start, size);
@@ -172,6 +179,7 @@ public class WatcherService extends GitHubService {
 	 * @param user
 	 * @return non-null but possibly empty list of repositories
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#getStarred}
 	 */
 	public List<Repository> getWatched(String user) throws IOException {
 		PagedRequest<Repository> request = createWatchedRequest(user,
@@ -185,6 +193,7 @@ public class WatcherService extends GitHubService {
 	 * @param user
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched(String user) throws IOException {
 		return pageWatched(user, PAGE_SIZE);
@@ -197,6 +206,7 @@ public class WatcherService extends GitHubService {
 	 * @param size
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched(String user, int size)
 			throws IOException {
@@ -211,6 +221,7 @@ public class WatcherService extends GitHubService {
 	 * @param size
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched(String user, int start, int size)
 			throws IOException {
@@ -224,6 +235,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @return non-null but possibly empty list of repositories
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#getStarred}
 	 */
 	public List<Repository> getWatched() throws IOException {
 		PagedRequest<Repository> request = createWatchedRequest(PAGE_FIRST,
@@ -236,6 +248,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched() throws IOException {
 		return pageWatched(PAGE_SIZE);
@@ -247,6 +260,7 @@ public class WatcherService extends GitHubService {
 	 * @param size
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched(int size) throws IOException {
 		return pageWatched(PAGE_FIRST, size);
@@ -259,6 +273,7 @@ public class WatcherService extends GitHubService {
 	 * @param size
 	 * @return page iterator
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#pageStarred}
 	 */
 	public PageIterator<Repository> pageWatched(int start, int size)
 			throws IOException {
@@ -272,6 +287,7 @@ public class WatcherService extends GitHubService {
 	 * @param repository
 	 * @return true if watch, false otherwise
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#isStarring}
 	 */
 	public boolean isWatching(IRepositoryIdProvider repository)
 			throws IOException {
@@ -287,6 +303,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @param repository
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#star}
 	 */
 	public void watch(IRepositoryIdProvider repository) throws IOException {
 		String id = getId(repository);
@@ -301,6 +318,7 @@ public class WatcherService extends GitHubService {
 	 *
 	 * @param repository
 	 * @throws IOException
+	 * @deprecated use {@link StargazerService#unstar}
 	 */
 	public void unwatch(IRepositoryIdProvider repository) throws IOException {
 		String id = getId(repository);

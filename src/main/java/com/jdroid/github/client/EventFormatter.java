@@ -116,6 +116,8 @@ public class EventFormatter implements JsonDeserializer<Event> {
 			payloadClass = PullRequestReviewCommentPayload.class;
 		else if (TYPE_PUSH.equals(type))
 			payloadClass = PushPayload.class;
+		else if (TYPE_RELEASE.equals(type))
+			payloadClass = ReleasePayload.class;
 		else if (TYPE_TEAM_ADD.equals(type))
 			payloadClass = TeamAddPayload.class;
 		else if (TYPE_WATCH.equals(type))
