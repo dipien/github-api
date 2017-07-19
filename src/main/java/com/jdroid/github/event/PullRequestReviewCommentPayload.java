@@ -10,9 +10,10 @@
  *****************************************************************************/
 package com.jdroid.github.event;
 
-import java.io.Serializable;
-
 import com.jdroid.github.CommitComment;
+import com.jdroid.github.PullRequest;
+
+import java.io.Serializable;
 
 /**
  * Payload for an event with type {@link Event#TYPE_PULL_REQUEST_REVIEW_COMMENT}

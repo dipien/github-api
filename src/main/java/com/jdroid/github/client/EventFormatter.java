@@ -10,36 +10,12 @@
  *******************************************************************************/
 package com.jdroid.github.client;
 
-import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
-import static com.jdroid.github.event.Event.TYPE_COMMIT_COMMENT;
-import static com.jdroid.github.event.Event.TYPE_CREATE;
-import static com.jdroid.github.event.Event.TYPE_DELETE;
-import static com.jdroid.github.event.Event.TYPE_DOWNLOAD;
-import static com.jdroid.github.event.Event.TYPE_FOLLOW;
-import static com.jdroid.github.event.Event.TYPE_FORK;
-import static com.jdroid.github.event.Event.TYPE_FORK_APPLY;
-import static com.jdroid.github.event.Event.TYPE_GIST;
-import static com.jdroid.github.event.Event.TYPE_GOLLUM;
-import static com.jdroid.github.event.Event.TYPE_ISSUES;
-import static com.jdroid.github.event.Event.TYPE_ISSUE_COMMENT;
-import static com.jdroid.github.event.Event.TYPE_MEMBER;
-import static com.jdroid.github.event.Event.TYPE_PUBLIC;
-import static com.jdroid.github.event.Event.TYPE_PULL_REQUEST;
-import static com.jdroid.github.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
-import static com.jdroid.github.event.Event.TYPE_PUSH;
-import static com.jdroid.github.event.Event.TYPE_TEAM_ADD;
-import static com.jdroid.github.event.Event.TYPE_WATCH;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-
-import java.lang.reflect.Type;
-import java.util.Date;
-
 import com.jdroid.github.event.CommitCommentPayload;
 import com.jdroid.github.event.CreatePayload;
 import com.jdroid.github.event.DeletePayload;
@@ -58,8 +34,33 @@ import com.jdroid.github.event.PublicPayload;
 import com.jdroid.github.event.PullRequestPayload;
 import com.jdroid.github.event.PullRequestReviewCommentPayload;
 import com.jdroid.github.event.PushPayload;
+import com.jdroid.github.event.ReleasePayload;
 import com.jdroid.github.event.TeamAddPayload;
 import com.jdroid.github.event.WatchPayload;
+
+import java.lang.reflect.Type;
+import java.util.Date;
+
+import static com.google.gson.FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES;
+import static com.jdroid.github.event.Event.TYPE_COMMIT_COMMENT;
+import static com.jdroid.github.event.Event.TYPE_CREATE;
+import static com.jdroid.github.event.Event.TYPE_DELETE;
+import static com.jdroid.github.event.Event.TYPE_DOWNLOAD;
+import static com.jdroid.github.event.Event.TYPE_FOLLOW;
+import static com.jdroid.github.event.Event.TYPE_FORK;
+import static com.jdroid.github.event.Event.TYPE_FORK_APPLY;
+import static com.jdroid.github.event.Event.TYPE_GIST;
+import static com.jdroid.github.event.Event.TYPE_GOLLUM;
+import static com.jdroid.github.event.Event.TYPE_ISSUES;
+import static com.jdroid.github.event.Event.TYPE_ISSUE_COMMENT;
+import static com.jdroid.github.event.Event.TYPE_MEMBER;
+import static com.jdroid.github.event.Event.TYPE_PUBLIC;
+import static com.jdroid.github.event.Event.TYPE_PULL_REQUEST;
+import static com.jdroid.github.event.Event.TYPE_PULL_REQUEST_REVIEW_COMMENT;
+import static com.jdroid.github.event.Event.TYPE_PUSH;
+import static com.jdroid.github.event.Event.TYPE_RELEASE;
+import static com.jdroid.github.event.Event.TYPE_TEAM_ADD;
+import static com.jdroid.github.event.Event.TYPE_WATCH;
 
 /**
  * Formats an event's payload with the appropriate class given a certain event
