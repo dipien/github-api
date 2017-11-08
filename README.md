@@ -12,11 +12,11 @@
 Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
 
     repositories {
-      mavenCentral()
+      jcenter()
     }
   
     dependencies {
-      classpath 'com.jdroidframework:jdroid-java-github:X.Y.Z'
+      implementation 'com.jdroidframework:jdroid-java-github:X.Y.Z'
     }
 
 ## Usage
