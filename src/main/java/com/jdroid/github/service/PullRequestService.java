@@ -111,6 +111,27 @@ public class PullRequestService extends GitHubService {
 		request.setType(PullRequest.class);
 		return (PullRequest) client.get(request).getBody();
 	}
+	
+	/**
+	 * Create request for single pull request
+	 *
+	 * @param repository
+	 * @param state
+	 * @param head
+	 * @param base
+	 * @return request
+	 */
+	public PullRequest getPullRequest(IRepositoryIdProvider repository, String state, String head, String base)
+			throws IOException {
+		PullRequest pullRequest = null;
+		List<PullRequest> pullRequests = getAll(pagePullRequests(repository, state, head, base));
+		if (pullRequests.size() > 1) {
+			throw new RuntimeException("Expected just one pull request");
+		} else if (!pullRequests.isEmpty()) {
+			pullRequest = pullRequests.get(0);
+		}
+		return pullRequest;
+	}
 
 	/**
 	 * Create paged request for fetching pull requests
@@ -136,7 +157,7 @@ public class PullRequestService extends GitHubService {
 		if (head != null) {
 			params.put(PR_HEAD, head);
 		}
-		if (head != null) {
+		if (base != null) {
 			params.put(PR_BASE, base);
 		}
 		if (!params.isEmpty()) {
@@ -157,7 +178,7 @@ public class PullRequestService extends GitHubService {
 	 */
 	public List<PullRequest> getPullRequests(IRepositoryIdProvider repository,
 			String state) throws IOException {
-		return getAll(pagePullRequests(repository, state));
+		return getAll(pagePullRequests(repository, state, null, null));
 	}
 
 	/**
@@ -168,8 +189,8 @@ public class PullRequestService extends GitHubService {
 	 * @return iterator over pages of pull requests
 	 */
 	public PageIterator<PullRequest> pagePullRequests(
-			IRepositoryIdProvider repository, String state) {
-		return pagePullRequests(repository, state, PAGE_SIZE);
+			IRepositoryIdProvider repository, String state, String head, String base) {
+		return pagePullRequests(repository, state, head, base, PAGE_SIZE);
 	}
 
 	/**
@@ -181,8 +202,8 @@ public class PullRequestService extends GitHubService {
 	 * @return iterator over pages of pull requests
 	 */
 	public PageIterator<PullRequest> pagePullRequests(
-			IRepositoryIdProvider repository, String state, int size) {
-		return pagePullRequests(repository, state, PAGE_FIRST, size);
+			IRepositoryIdProvider repository, String state, String head, String base, int size) {
+		return pagePullRequests(repository, state, head, base, PAGE_FIRST, size);
 	}
 
 	/**
@@ -195,49 +216,10 @@ public class PullRequestService extends GitHubService {
 	 * @return iterator over pages of pull requests
 	 */
 	public PageIterator<PullRequest> pagePullRequests(
-			IRepositoryIdProvider repository, String state, int start, int size) {
-		PagedRequest<PullRequest> request = createPullsRequest(repository,
-				state, start, size);
+			IRepositoryIdProvider repository, String state, String head, String base, int start, int size) {
+		PagedRequest<PullRequest> request = createPagedRequest(repository,
+				state, head, base, start, size);
 		return createPageIterator(request);
-	}
-
-	private Map<String, String> createPrMap(PullRequest request) {
-		Map<String, String> params = new HashMap<String, String>();
-		if (request != null) {
-			String title = request.getTitle();
-			if (title != null)
-				params.put(PR_TITLE, title);
-			String body = request.getBody();
-			if (body != null)
-				params.put(PR_BODY, body);
-			PullRequestMarker baseMarker = request.getBase();
-			if (baseMarker != null) {
-				String base = baseMarker.getLabel();
-				if (base != null)
-					params.put(PR_BASE, base);
-			}
-			PullRequestMarker headMarker = request.getHead();
-			if (headMarker != null) {
-				String head = headMarker.getLabel();
-				if (head != null)
-					params.put(PR_HEAD, head);
-			}
-		}
-		return params;
-	}
-
-	private Map<String, String> editPrMap(PullRequest request) {
-		Map<String, String> params = new HashMap<String, String>();
-		String title = request.getTitle();
-		if (title != null)
-			params.put(PR_TITLE, title);
-		String body = request.getBody();
-		if (body != null)
-			params.put(PR_BODY, body);
-		String state = request.getState();
-		if (state != null)
-			params.put(PR_STATE, state);
-		return params;
 	}
 
 	/**
