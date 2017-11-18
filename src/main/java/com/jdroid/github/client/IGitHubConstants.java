@@ -74,6 +74,9 @@ public interface IGitHubConstants {
 
 	/** */
 	String SEGMENT_AUTHORIZATIONS = "/authorizations"; //$NON-NLS-1$
+	
+	String SEGMENT_ASSIGNEES = "/assignees";
+	
 	/** */
 	String SEGMENT_BLOBS = "/blobs"; //$NON-NLS-1$
 	/** */

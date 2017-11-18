@@ -10,25 +10,7 @@
  *******************************************************************************/
 package com.jdroid.github.service;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_EVENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ISSUES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LEGACY;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_SEARCH;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
-
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.jdroid.github.Comment;
 import com.jdroid.github.IRepositoryIdProvider;
 import com.jdroid.github.IResourceProvider;
@@ -43,6 +25,24 @@ import com.jdroid.github.client.GitHubClient;
 import com.jdroid.github.client.GitHubRequest;
 import com.jdroid.github.client.PageIterator;
 import com.jdroid.github.client.PagedRequest;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ASSIGNEES;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMENTS;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_EVENTS;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ISSUES;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LEGACY;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.jdroid.github.client.IGitHubConstants.SEGMENT_SEARCH;
+import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
+import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Issue service class for listing, searching, and fetching {@link Issue}
@@ -112,6 +112,8 @@ public class IssueService extends GitHubService {
 	 * Issue body field name
 	 */
 	public static final String FIELD_BODY = "body"; //$NON-NLS-1$
+	
+	public static final String FIELD_ASSIGNEES = "assignees";
 
 	/**
 	 * Issue title field name
@@ -263,37 +265,6 @@ public class IssueService extends GitHubService {
 	/**
 	 * Get issue
 	 *
-	 * @param user
-	 * @param repository
-	 * @param issueNumber
-	 * @return issue
-	 * @throws IOException
-	 */
-	public Issue getIssue(String user, String repository, int issueNumber)
-			throws IOException {
-		return getIssue(user, repository, Integer.toString(issueNumber));
-	}
-
-	/**
-	 * Get issue
-	 *
-	 * @param user
-	 * @param repository
-	 * @param issueNumber
-	 * @return issue
-	 * @throws IOException
-	 */
-	public Issue getIssue(String user, String repository, String issueNumber)
-			throws IOException {
-		verifyRepository(user, repository);
-
-		String repoId = user + '/' + repository;
-		return getIssue(repoId, issueNumber);
-	}
-
-	/**
-	 * Get issue
-	 *
 	 * @param repository
 	 * @param issueNumber
 	 * @return issue
@@ -301,34 +272,12 @@ public class IssueService extends GitHubService {
 	 */
 	public Issue getIssue(IRepositoryIdProvider repository, int issueNumber)
 			throws IOException {
-		return getIssue(repository, Integer.toString(issueNumber));
-	}
-
-	/**
-	 * Get issue
-	 *
-	 * @param repository
-	 * @param issueNumber
-	 * @return issue
-	 * @throws IOException
-	 */
-	public Issue getIssue(IRepositoryIdProvider repository, String issueNumber)
-			throws IOException {
+		
 		String repoId = getId(repository);
-		return getIssue(repoId, issueNumber);
-	}
-
-	private Issue getIssue(String repoId, String issueNumber)
-			throws IOException {
-		if (issueNumber == null)
-			throw new IllegalArgumentException("Issue number cannot be null"); //$NON-NLS-1$
-		if (issueNumber.length() == 0)
-			throw new IllegalArgumentException("Issue number cannot be empty"); //$NON-NLS-1$
-
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
 		uri.append(SEGMENT_ISSUES);
-		uri.append('/').append(issueNumber);
+		uri.append('/').append(Integer.toString(issueNumber));
 		GitHubRequest request = createRequest();
 		request.setUri(uri);
 		request.setType(Issue.class);
@@ -338,79 +287,19 @@ public class IssueService extends GitHubService {
 	/**
 	 * Get an issue's comments
 	 *
-	 * @param user
 	 * @param repository
 	 * @param issueNumber
 	 * @return list of comments
 	 * @throws IOException
 	 */
-	public List<Comment> getComments(String user, String repository,
-			int issueNumber) throws IOException {
-		return getComments(user, repository, Integer.toString(issueNumber));
-	}
-
-	/**
-	 * Get an issue's comments
-	 *
-	 * @param user
-	 * @param repository
-	 * @param issueNumber
-	 * @return list of comments
-	 * @throws IOException
-	 */
-	public List<Comment> getComments(String user, String repository,
-			String issueNumber) throws IOException {
-		verifyRepository(user, repository);
-		String repoId = user + '/' + repository;
-		return getComments(repoId, issueNumber);
-	}
-
-	/**
-	 * Get an issue's comments
-	 *
-	 * @param repository
-	 * @param issueNumber
-	 * @return list of comments
-	 * @throws IOException
-	 */
-	public List<Comment> getComments(IRepositoryIdProvider repository,
-			int issueNumber) throws IOException {
-		return getComments(repository, Integer.toString(issueNumber));
-	}
-
-	/**
-	 * Get an issue's comments
-	 *
-	 * @param repository
-	 * @param issueNumber
-	 * @return list of comments
-	 * @throws IOException
-	 */
-	public List<Comment> getComments(IRepositoryIdProvider repository,
-			String issueNumber) throws IOException {
-		String repoId = getId(repository);
-		return getComments(repoId, issueNumber);
-	}
-
-	/**
-	 * Get an issue's comments
-	 *
-	 * @param repository
-	 * @param issueNumber
-	 * @return list of comments
-	 * @throws IOException
-	 */
-	private List<Comment> getComments(String repoId, String issueNumber)
+	public List<Comment> getComments(IRepositoryIdProvider repository, int issueNumber)
 			throws IOException {
-		if (issueNumber == null)
-			throw new IllegalArgumentException("Issue number cannot be null"); //$NON-NLS-1$
-		if (issueNumber.length() == 0)
-			throw new IllegalArgumentException("Issue number cannot be empty"); //$NON-NLS-1$
-
+		
+		String repoId = getId(repository);
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
 		uri.append(SEGMENT_ISSUES);
-		uri.append('/').append(issueNumber);
+		uri.append('/').append(Integer.toString(issueNumber));
 		uri.append(SEGMENT_COMMENTS);
 		PagedRequest<Comment> request = createPagedRequest();
 		request.setUri(uri);
@@ -428,7 +317,7 @@ public class IssueService extends GitHubService {
 	 * @param size
 	 * @return paged request
 	 */
-	protected PagedRequest<Issue> createIssuesRequest(String repoId,
+	protected PagedRequest<Issue> createPagedRequest(String repoId,
 			Map<String, String> filterData, int start, int size) {
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
@@ -438,20 +327,6 @@ public class IssueService extends GitHubService {
 		request.setType(new TypeToken<List<Issue>>() {
 		}.getType());
 		return request;
-	}
-
-	/**
-	 * Get a list of {@link Issue} objects that match the specified filter data
-	 *
-	 * @param user
-	 * @param repository
-	 * @param filterData
-	 * @return list of issues
-	 * @throws IOException
-	 */
-	public List<Issue> getIssues(String user, String repository,
-			Map<String, String> filterData) throws IOException {
-		return getAll(pageIssues(user, repository, filterData));
 	}
 
 	/**
@@ -521,7 +396,7 @@ public class IssueService extends GitHubService {
 			Map<String, String> filterData, int start, int size) {
 		verifyRepository(user, repository);
 		String repoId = user + '/' + repository;
-		PagedRequest<Issue> request = createIssuesRequest(repoId, filterData,
+		PagedRequest<Issue> request = createPagedRequest(repoId, filterData,
 				start, size);
 		return createPageIterator(request);
 	}
@@ -575,7 +450,7 @@ public class IssueService extends GitHubService {
 	public PageIterator<Issue> pageIssues(IRepositoryIdProvider repository,
 			Map<String, String> filterData, int start, int size) {
 		String repoId = getId(repository);
-		PagedRequest<Issue> request = createIssuesRequest(repoId, filterData,
+		PagedRequest<Issue> request = createPagedRequest(repoId, filterData,
 				start, size);
 		return createPageIterator(request);
 	}
@@ -620,23 +495,6 @@ public class IssueService extends GitHubService {
 	/**
 	 * Create issue
 	 *
-	 * @param user
-	 * @param repository
-	 * @param issue
-	 * @return created issue
-	 * @throws IOException
-	 */
-	public Issue createIssue(String user, String repository, Issue issue)
-			throws IOException {
-		verifyRepository(user, repository);
-
-		String repoId = user + '/' + repository;
-		return createIssue(repoId, issue);
-	}
-
-	/**
-	 * Create issue
-	 *
 	 * @param repository
 	 * @param issue
 	 * @return created issue
@@ -645,42 +503,12 @@ public class IssueService extends GitHubService {
 	public Issue createIssue(IRepositoryIdProvider repository, Issue issue)
 			throws IOException {
 		String repoId = getId(repository);
-		return createIssue(repoId, issue);
-	}
-
-	/**
-	 * Create issue
-	 *
-	 * @param repoId
-	 * @param issue
-	 * @return created issue
-	 * @throws IOException
-	 */
-	private Issue createIssue(String repoId, Issue issue) throws IOException {
-
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
 		uri.append(SEGMENT_ISSUES);
 
 		Map<Object, Object> params = createIssueMap(issue, true);
 		return client.post(uri.toString(), params, Issue.class);
-	}
-
-	/**
-	 * Edit issue
-	 *
-	 * @param user
-	 * @param repository
-	 * @param issue
-	 * @return created issue
-	 * @throws IOException
-	 */
-	public Issue editIssue(String user, String repository, Issue issue)
-			throws IOException {
-		verifyRepository(user, repository);
-
-		String repoId = user + '/' + repository;
-		return editIssue(repoId, issue);
 	}
 
 	/**
@@ -694,19 +522,6 @@ public class IssueService extends GitHubService {
 	public Issue editIssue(IRepositoryIdProvider repository, Issue issue)
 			throws IOException {
 		String repoId = getId(repository);
-		return editIssue(repoId, issue);
-	}
-
-	/**
-	 * Edit issue
-	 *
-	 * @param repoId
-	 * @param repository
-	 * @param issue
-	 * @return created issue
-	 * @throws IOException
-	 */
-	private Issue editIssue(String repoId, Issue issue) throws IOException {
 		if (issue == null)
 			throw new IllegalArgumentException("Issue cannot be null"); //$NON-NLS-1$
 
@@ -719,6 +534,19 @@ public class IssueService extends GitHubService {
 		String state = issue.getState();
 		if (state != null)
 			params.put(FILTER_STATE, state);
+		return client.post(uri.toString(), params, Issue.class);
+	}
+	
+	public Issue addAssignee(IRepositoryIdProvider repository, int number, String assignee) throws IOException {
+		String repoId = getId(repository);
+		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
+		uri.append('/').append(repoId);
+		uri.append(SEGMENT_ISSUES);
+		uri.append('/').append(number);
+		uri.append(SEGMENT_ASSIGNEES);
+		
+		Map<Object, Object> params = new HashMap<>();
+		params.put(FIELD_ASSIGNEES, assignee);
 		return client.post(uri.toString(), params, Issue.class);
 	}
 
@@ -839,23 +667,6 @@ public class IssueService extends GitHubService {
 	/**
 	 * Edit issue comment
 	 *
-	 * @param user
-	 * @param repository
-	 * @param comment
-	 * @return edited comment
-	 * @throws IOException
-	 */
-	public Comment editComment(String user, String repository, Comment comment)
-			throws IOException {
-		verifyRepository(user, repository);
-
-		String repoId = user + '/' + repository;
-		return editComment(repoId, comment);
-	}
-
-	/**
-	 * Edit issue comment
-	 *
 	 * @param repository
 	 * @param comment
 	 * @return edited comment
@@ -864,20 +675,6 @@ public class IssueService extends GitHubService {
 	public Comment editComment(IRepositoryIdProvider repository, Comment comment)
 			throws IOException {
 		String repoId = getId(repository);
-		return editComment(repoId, comment);
-	}
-
-	/**
-	 * Edit issue comment
-	 *
-	 * @param user
-	 * @param repository
-	 * @param comment
-	 * @return edited comment
-	 * @throws IOException
-	 */
-	private Comment editComment(String repoId, Comment comment)
-			throws IOException {
 		if (comment == null)
 			throw new IllegalArgumentException("Comment cannot be null"); //$NON-NLS-1$
 
@@ -891,76 +688,17 @@ public class IssueService extends GitHubService {
 	/**
 	 * Delete the issue comment with the given id
 	 *
-	 * @param user
-	 * @param repository
-	 * @param commentId
-	 * @throws IOException
-	 */
-	public void deleteComment(String user, String repository, long commentId)
-			throws IOException {
-		deleteComment(user, repository, Long.toString(commentId));
-	}
-
-	/**
-	 * Delete the issue comment with the given id
-	 *
-	 * @param user
-	 * @param repository
-	 * @param commentId
-	 * @throws IOException
-	 */
-	public void deleteComment(String user, String repository, String commentId)
-			throws IOException {
-		verifyRepository(user, repository);
-
-		String repoId = user + '/' + repository;
-		deleteComment(repoId, commentId);
-	}
-
-	/**
-	 * Delete the issue comment with the given id
-	 *
 	 * @param repository
 	 * @param commentId
 	 * @throws IOException
 	 */
 	public void deleteComment(IRepositoryIdProvider repository, long commentId)
 			throws IOException {
-		deleteComment(repository, Long.toString(commentId));
-	}
-
-	/**
-	 * Delete the issue comment with the given id
-	 *
-	 * @param repository
-	 * @param commentId
-	 * @throws IOException
-	 */
-	public void deleteComment(IRepositoryIdProvider repository, String commentId)
-			throws IOException {
 		String repoId = getId(repository);
-		deleteComment(repoId, commentId);
-	}
-
-	/**
-	 * Delete the issue comment with the given id
-	 *
-	 * @param user
-	 * @param repository
-	 * @param commentId
-	 * @throws IOException
-	 */
-	private void deleteComment(String repoId, String commentId)
-			throws IOException {
-		if (commentId == null)
-			throw new IllegalArgumentException("Comment cannot be null"); //$NON-NLS-1$
-		if (commentId.length() == 0)
-			throw new IllegalArgumentException("Comment cannot be empty"); //$NON-NLS-1$
-
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
 		uri.append(SEGMENT_ISSUES).append(SEGMENT_COMMENTS);
-		uri.append('/').append(commentId);
+		uri.append('/').append(Long.toString(commentId));
 		client.delete(uri.toString());
 	}
 
