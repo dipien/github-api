@@ -21,8 +21,8 @@ buildscript {
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 	}
 	dependencies {
-		classpath 'com.jdroidframework:jdroid-gradle-java-plugin:0.16.0'
-		classpath 'com.jdroidframework:jdroid-component-builder:0.3.0-SNAPSHOT'
+		classpath 'com.jdroidframework:jdroid-gradle-java-plugin:0.18.0'
+		classpath 'com.jdroidframework:jdroid-component-builder:0.4.0'
 	}
 }
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-	compile 'com.google.code.gson:gson:2.2.2'
+	implementation 'com.google.code.gson:gson:2.2.2'
 }
 
 // https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core
