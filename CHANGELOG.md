@@ -1,5 +1,14 @@
 # Change Log
 
+## [v0.9.4](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.4) (2017-11-18)
+[Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.3...v0.9.4)
+
+**Implemented enhancements:**
+
+- Support to filter pull requests by head & base branches [\#7](https://github.com/maxirosson/jdroid-java-github/issues/7)
+- Close Pull Request support [\#6](https://github.com/maxirosson/jdroid-java-github/issues/6)
+- StargazerService support [\#5](https://github.com/maxirosson/jdroid-java-github/issues/5)
+
 ## [v0.9.3](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.3) (2016-07-05)
 [Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.2...v0.9.3)
 
