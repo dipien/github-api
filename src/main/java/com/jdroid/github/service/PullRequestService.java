@@ -10,6 +10,24 @@
  *******************************************************************************/
 package com.jdroid.github.service;
 
+import com.google.gson.reflect.TypeToken;
+import com.jdroid.github.CommitComment;
+import com.jdroid.github.CommitFile;
+import com.jdroid.github.IRepositoryIdProvider;
+import com.jdroid.github.MergeStatus;
+import com.jdroid.github.PullRequest;
+import com.jdroid.github.RepositoryCommit;
+import com.jdroid.github.client.GitHubClient;
+import com.jdroid.github.client.GitHubRequest;
+import com.jdroid.github.client.PageIterator;
+import com.jdroid.github.client.PagedRequest;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMENTS;
 import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMITS;
 import static com.jdroid.github.client.IGitHubConstants.SEGMENT_FILES;
@@ -18,26 +36,6 @@ import static com.jdroid.github.client.IGitHubConstants.SEGMENT_PULLS;
 import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
 import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
 import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.jdroid.github.CommitComment;
-import com.jdroid.github.CommitFile;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.MergeStatus;
-import com.jdroid.github.PullRequest;
-import com.jdroid.github.PullRequestMarker;
-import com.jdroid.github.RepositoryCommit;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
 
 /**
  * Service class for creating, updating, getting, and listing pull requests as
@@ -60,12 +58,12 @@ public class PullRequestService extends GitHubService {
 	 * PR_BODY
 	 */
 	public static final String PR_BODY = "body"; //$NON-NLS-1$
-
+	
 	/**
 	 * PR_BASE
 	 */
 	public static final String PR_BASE = "base"; //$NON-NLS-1$
-
+	
 	/**
 	 * PR_HEAD
 	 */
@@ -75,7 +73,8 @@ public class PullRequestService extends GitHubService {
 	 * PR_STATE
 	 */
 	public static final String PR_STATE = "state"; //$NON-NLS-1$
-
+	public static final String ISSUE = "issue";
+	
 	/**
 	 * Create pull request service
 	 */
@@ -122,8 +121,7 @@ public class PullRequestService extends GitHubService {
 	 * @param size
 	 * @return paged request
 	 */
-	protected PagedRequest<PullRequest> createPullsRequest(
-			IRepositoryIdProvider provider, String state, int start, int size) {
+	protected PagedRequest<PullRequest> createPagedRequest(IRepositoryIdProvider provider, String state, String head, String base, int start, int size) {
 		final String id = getId(provider);
 
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
@@ -131,9 +129,19 @@ public class PullRequestService extends GitHubService {
 		uri.append(SEGMENT_PULLS);
 		PagedRequest<PullRequest> request = createPagedRequest(start, size);
 		request.setUri(uri);
-		if (state != null)
-			request.setParams(Collections.singletonMap(
-					IssueService.FILTER_STATE, state));
+		Map<String, String> params = new HashMap<>();
+		if (state != null) {
+			params.put(IssueService.FILTER_STATE, state);
+		}
+		if (head != null) {
+			params.put(PR_HEAD, head);
+		}
+		if (head != null) {
+			params.put(PR_BASE, base);
+		}
+		if (!params.isEmpty()) {
+			request.setParams(params);
+		}
 		request.setType(new TypeToken<List<PullRequest>>() {
 		}.getType());
 		return request;
@@ -236,18 +244,22 @@ public class PullRequestService extends GitHubService {
 	 * Create pull request
 	 *
 	 * @param repository
-	 * @param request
 	 * @return created pull request
 	 * @throws IOException
 	 */
-	public PullRequest createPullRequest(IRepositoryIdProvider repository,
-			PullRequest request) throws IOException {
+	public PullRequest createPullRequest(IRepositoryIdProvider repository, String title, String body, String head, String base) throws IOException {
 		String id = getId(repository);
 
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(id);
 		uri.append(SEGMENT_PULLS);
-		Map<String, String> params = createPrMap(request);
+		
+		Map<String, String> params = new HashMap<>();
+		params.put(PR_TITLE, title);
+		params.put(PR_BODY, body);
+		params.put(PR_BASE, base);
+		params.put(PR_HEAD, head);
+		
 		return client.post(uri.toString(), params, PullRequest.class);
 	}
 
@@ -268,9 +280,9 @@ public class PullRequestService extends GitHubService {
 		uri.append('/').append(id);
 		uri.append(SEGMENT_PULLS);
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("issue", issueId); //$NON-NLS-1$
-		params.put("head", head); //$NON-NLS-1$
-		params.put("base", base); //$NON-NLS-1$
+		params.put(ISSUE, issueId);
+		params.put(PR_HEAD, head);
+		params.put(PR_BASE, base);
 		return client.post(uri.toString(), params, PullRequest.class);
 	}
 
@@ -278,21 +290,35 @@ public class PullRequestService extends GitHubService {
 	 * Edit pull request
 	 *
 	 * @param repository
-	 * @param request
 	 * @return edited pull request
 	 * @throws IOException
 	 */
-	public PullRequest editPullRequest(IRepositoryIdProvider repository,
-			PullRequest request) throws IOException {
+	public PullRequest editPullRequest(IRepositoryIdProvider repository, int number, String title, String body, String state, String base) throws IOException {
 		String id = getId(repository);
-		if (request == null)
-			throw new IllegalArgumentException("Request cannot be null"); //$NON-NLS-1$
-
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(id);
 		uri.append(SEGMENT_PULLS);
-		uri.append('/').append(request.getNumber());
-		Map<String, String> params = editPrMap(request);
+		uri.append('/').append(number);
+		
+		Map<String, String> params = new HashMap<>();
+		params.put(PR_TITLE, title);
+		params.put(PR_BODY, body);
+		params.put(PR_STATE, state);
+		params.put(PR_BASE, base);
+		
+		return client.post(uri.toString(), params, PullRequest.class);
+	}
+	
+	public PullRequest closePullRequest(IRepositoryIdProvider repository, int number) throws IOException {
+		String id = getId(repository);
+		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
+		uri.append('/').append(id);
+		uri.append(SEGMENT_PULLS);
+		uri.append('/').append(number);
+		
+		Map<String, String> params = new HashMap<>();
+		params.put(PR_STATE, IssueService.STATE_CLOSED);
+		
 		return client.post(uri.toString(), params, PullRequest.class);
 	}
 
@@ -365,18 +391,18 @@ public class PullRequestService extends GitHubService {
 	 * Merge given pull request
 	 *
 	 * @param repository
-	 * @param id
+	 * @param number
 	 * @param commitMessage
 	 * @return status of merge
 	 * @throws IOException
 	 */
-	public MergeStatus merge(IRepositoryIdProvider repository, int id,
+	public MergeStatus merge(IRepositoryIdProvider repository, int number,
 			String commitMessage) throws IOException {
 		String repoId = getId(repository);
 		StringBuilder uri = new StringBuilder(SEGMENT_REPOS);
 		uri.append('/').append(repoId);
 		uri.append(SEGMENT_PULLS);
-		uri.append('/').append(id);
+		uri.append('/').append(number);
 		uri.append(SEGMENT_MERGE);
 		return client.put(uri.toString(),
 				Collections.singletonMap("commit_message", commitMessage), //$NON-NLS-1$
