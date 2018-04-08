@@ -1,11 +1,11 @@
 # Java Connector for GitHub API
 
 ## Continuous Integration
-|Branch|Status|
-| ------------- | ------------- |
-|Master|[![Build Status](https://travis-ci.org/maxirosson/jdroid-java-github.svg?branch=master)](https://travis-ci.org/maxirosson/jdroid-java-github)|
-|Staging|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java-github.svg?branch=staging)](https://travis-ci.org/maxirosson/jdroid-java-github)|
-|Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java-github.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid-java-github)|
+|Branch|Status|Workflows|Insights|
+| ------------- | ------------- | ------------- | ------------- |
+|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/master)|
+|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/staging)|
+|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/production)|
 
 ## Setup 
 
@@ -42,5 +42,3 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
 Help us to continue with this project:
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2UEBTRTSCYA9L)
-
-<a href='https://pledgie.com/campaigns/30030'><img alt='Click here to lend your support to: Jdroid and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30030.png?skin_name=chrome' border='0' ></a>
