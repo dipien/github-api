@@ -7,6 +7,7 @@ import com.jdroid.github.client.GitHubClient;
 import com.jdroid.github.client.GitHubRequest;
 import com.jdroid.github.client.PageIterator;
 import com.jdroid.github.client.PagedRequest;
+import com.jdroid.github.client.RequestException;
 
 import java.io.IOException;
 import java.util.List;
@@ -73,6 +74,14 @@ public class ReleaseService extends GitHubService {
 		GitHubRequest request = createRequest();
 		request.setUri(uri);
 		request.setType(Release.class);
-		return (Release) client.get(request).getBody();
+		try {
+			return (Release) client.get(request).getBody();
+		} catch (RequestException requestException) {
+			if (requestException.getStatus() == 404) {
+				return null;
+			} else {
+				throw requestException;
+			}
+		}
 	}
 }
