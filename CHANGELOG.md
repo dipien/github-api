@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.0.0](https://github.com/maxirosson/jdroid-java-github/tree/v1.0.0) (2018-04-10)
+[Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.4...v1.0.0)
+
+**Closed issues:**
+
+- New group id: com.jdroidtools [\#8](https://github.com/maxirosson/jdroid-java-github/issues/8)
+
 ## [v0.9.4](https://github.com/maxirosson/jdroid-java-github/tree/v0.9.4) (2017-11-18)
 [Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.3...v0.9.4)
 
