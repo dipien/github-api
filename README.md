@@ -16,7 +16,7 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
     }
   
     dependencies {
-      implementation 'com.jdroidframework:jdroid-java-github:X.Y.Z'
+      implementation 'com.jdroidtools:jdroid-java-github:X.Y.Z'
     }
 
 ## Usage
