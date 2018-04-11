@@ -21,8 +21,8 @@ buildscript {
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 	}
 	dependencies {
-		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:1.0.2'
-		classpath 'com.jdroidtools:jdroid-component-builder:1.0.0'
+		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:1.0.0'
+		classpath 'com.jdroidtools:jdroid-component-builder:1.0.2'
 	}
 }
 
