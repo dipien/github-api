@@ -4,7 +4,6 @@
 |Branch|Status|Workflows|Insights|
 | ------------- | ------------- | ------------- | ------------- |
 |master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/master)|
-|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/staging)|
 |production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/production)|
 
 ## Setup 
