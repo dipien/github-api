@@ -4,8 +4,8 @@ ext.PROJECT_NAME = 'Jdroid Java GitHub'
 
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
 
-apply plugin: 'com.jdroid.java.library'
-apply plugin: 'com.jdroid.component.builder'
+apply plugin: 'com.jdroidtools.component.builder'
+apply plugin: 'com.jdroidtools.java.library'
 
 description = 'Java Connector for GitHub API'
 
@@ -21,10 +21,10 @@ buildscript {
 	}
 	dependencies {
 		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:1.0.0'
+		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:2.0.0'
 
 		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-component-builder:1.0.2'
+		classpath 'com.jdroidtools:jdroid-component-builder:2.0.0'
 	}
 }
 
