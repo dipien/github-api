@@ -2,7 +2,7 @@ version = '1.1.0'
 
 ext.PROJECT_NAME = 'Jdroid Java GitHub'
 
-ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
+ext.GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
 
 apply plugin: 'com.jdroidtools.component.builder'
 apply plugin: 'com.jdroidtools.java.library'
@@ -12,19 +12,16 @@ description = 'Java Connector for GitHub API'
 buildscript {
 	repositories {
 		jcenter()
-		maven { url "https://plugins.gradle.org/m2/" }
 		String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
 		if (localMavenRepo != null) {
 			maven { url localMavenRepo }
 		}
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+		maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
-		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:2.0.0'
-
-		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-component-builder:2.0.0'
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+		classpath(BuildLibs.JDROID_COMPONENT_BUILDER)
 	}
 }
 
@@ -33,7 +30,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.google.code.gson:gson:2.8.5'
+	implementation(Libs.GSON)
 }
 
 // https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core

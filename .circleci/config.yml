@@ -1,30 +1,51 @@
 defaults: &defaults
-  working_directory: ~/jdroid-java-github
-  docker:
-    - image: circleci/openjdk:8-jdk
-  environment:
-    JVM_OPTS: -Xmx3200m
-    LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=true
+
+  ## Workspace
+
+  workspace: &workspace
+               ~/workspace
+
+  ## Cache
+
+  cache_key: &cache_key
+    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}
+  restore_cache: &restore_cache
+    restore_cache:
+      <<: *cache_key
+  save_cache: &save_cache
+    save_cache:
+      <<: *cache_key
+      paths:
+        - ~/.gradle
+        - ~/.m2
+
+  ## Docker image configurations
+
+  jdk_config: &jdk_config
+    working_directory: *workspace
+    docker:
+      - image: circleci/openjdk:8-jdk
+    environment:
+      JVM_OPTS: -Xmx3200m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=false
+
 version: 2
 jobs:
   build:
-    <<: *defaults
+    <<: *jdk_config
     steps:
       - checkout
+      <<: *jdk_config
 
-      # Download and cache dependencies
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew dependencies --refresh-dependencies --stacktrace
+      - *save_cache
 
       - run:
-          name: Assembling
-          command: ./gradlew assemble --refresh-dependencies --stacktrace --scan
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+        name: Assembling
+        command: ./gradlew assemble --refresh-dependencies --stacktrace --scan
 
       - run:
           name: Saving jars
@@ -37,22 +58,21 @@ jobs:
           path: ~/jars
           destination: jars
 
-  verify:
-    <<: *defaults
+  ktlint:
+    <<: *jdk_config
     steps:
       - checkout
+      - run: ./gradlew ktlint --stacktrace
 
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+  test:
+    <<: *jdk_config
+    steps:
+      - checkout
+      - *restore_cache
 
       - run:
           name: Verifying
           command: ./gradlew check --stacktrace
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
 
       - run:
           name: Saving test results
@@ -68,23 +88,32 @@ jobs:
           destination: tests
 
   publish:
-    <<: *defaults
+    <<: *jdk_config
     steps:
       - checkout
-
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
 
       - run:
           name: Uploading to Nexus Sonatype
           command: ./gradlew uploadArchives -PLOCAL_UPLOAD=false --stacktrace
 
+  upgradeDependencies:
+    <<: *jdk_config
+    steps:
+      - checkout
+      - run:
+          name: Upgrade Dependencies
+          command: ./gradlew upgradeDependencies -PpullRequestEnabled=true --stacktrace
+
 workflows:
   version: 2
   commit:
     jobs:
-      - build
-      - verify:
+      - ktlint
+      - build:
+          requires:
+            - ktlint
+      - test:
           requires:
             - build
       - publish:
@@ -94,3 +123,13 @@ workflows:
                 - master
           requires:
             - verify
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - upgradeDependencies
