@@ -1,13 +1,9 @@
 version = '1.1.0'
 
-ext.PROJECT_NAME = 'Jdroid Java GitHub'
-
 ext.GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
 
 apply plugin: 'com.jdroidtools.component.builder'
-apply plugin: 'com.jdroidtools.java.library'
-
-description = 'Java Connector for GitHub API'
+apply plugin: 'com.jdroidtools.root'
 
 buildscript {
 	repositories {
@@ -17,20 +13,45 @@ buildscript {
 			maven { url localMavenRepo }
 		}
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		maven { url "https://plugins.gradle.org/m2/" }
+		gradlePluginPortal()
 	}
 	dependencies {
-		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+		classpath(BuildLibs.JDROID_GRADLE_ROOT_PLUGIN)
 		classpath(BuildLibs.JDROID_COMPONENT_BUILDER)
 	}
 }
 
-repositories {
-	jcenter()
-}
+subprojects {
+	buildscript {
+		repositories {
+			jcenter()
+			def localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
+			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+			if (isLocalMavenRepoEnabled) {
+				def localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
+				if (localMavenRepo != null) {
+					maven { url localMavenRepo }
+				}
+			}
+			maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+			mavenCentral()
+			gradlePluginPortal()
+		}
+	}
 
-dependencies {
-	implementation(Libs.GSON)
+	repositories {
+		jcenter()
+		def localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			def localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
+			if (localMavenRepo != null) {
+				maven { url localMavenRepo }
+			}
+		}
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+		mavenCentral()
+	}
 }
 
 // https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core/src/org/eclipse/egit/github/core
