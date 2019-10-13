@@ -36,7 +36,6 @@ jobs:
     <<: *jdk_config
     steps:
       - checkout
-      <<: *jdk_config
 
       - *restore_cache
       - run:
