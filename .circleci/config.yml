@@ -44,8 +44,8 @@ jobs:
       - *save_cache
 
       - run:
-        name: Assembling
-        command: ./gradlew assemble --refresh-dependencies --stacktrace --scan
+          name: Assembling
+          command: ./gradlew assemble --refresh-dependencies --stacktrace --scan
 
       - run:
           name: Saving jars
