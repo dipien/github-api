@@ -1,4 +1,6 @@
-defaults: &defaults
+version: 2
+
+references:
 
   ## Workspace
 
@@ -29,7 +31,6 @@ defaults: &defaults
       JVM_OPTS: -Xmx3200m
       GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=false
 
-version: 2
 jobs:
   build:
     <<: *jdk_config
