@@ -483,7 +483,7 @@ public class IssueService extends GitHubService {
 			}
 			List<Label> labels = issue.getLabels();
 			if (labels != null) {
-				List<String> labelNames = new ArrayList<String>(labels.size());
+				List<String> labelNames = new ArrayList<>(labels.size());
 				for (Label label : labels)
 					labelNames.add(label.getName());
 				params.put(FILTER_LABELS, labelNames);
