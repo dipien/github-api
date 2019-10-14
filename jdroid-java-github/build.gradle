@@ -1,5 +1,6 @@
 ext.PROJECT_NAME = 'Jdroid Java GitHub'
 ext.ARTIFACT_ID = "jdroid-java-github"
+description = 'Jdroid Java GitHub'
 
 apply plugin: 'com.jdroidtools.java.library'
 
