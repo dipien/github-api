@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.1.0](https://github.com/maxirosson/jdroid-java-github/tree/v1.1.0) (2019-10-13)
+[Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- New createReviewRequest API [\#10](https://github.com/maxirosson/jdroid-java-github/issues/10)
+- New addLabelsToIssue API [\#9](https://github.com/maxirosson/jdroid-java-github/issues/9)
+
 ## [v1.0.0](https://github.com/maxirosson/jdroid-java-github/tree/v1.0.0) (2018-04-10)
 [Full Changelog](https://github.com/maxirosson/jdroid-java-github/compare/v0.9.4...v1.0.0)
 
