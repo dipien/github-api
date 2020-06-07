@@ -7,13 +7,47 @@ apply plugin: 'com.jdroidtools.root'
 
 buildscript {
 	repositories {
-		jcenter()
-		String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-		if (localMavenRepo != null) {
-			maven { url localMavenRepo }
+		jcenter {
+			mavenContent {
+				releasesOnly()
+			}
 		}
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		gradlePluginPortal()
+		String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+			if (localMavenRepo != null) {
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
+				}
+			}
+		}
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
+		maven {
+			url = "https://plugins.gradle.org/m2/"
+			content {
+				excludeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
 	dependencies {
 		classpath(BuildLibs.JDROID_GRADLE_ROOT_PLUGIN)
@@ -21,36 +55,86 @@ buildscript {
 	}
 }
 
-subprojects {
+allprojects {
 	buildscript {
 		repositories {
-			jcenter()
-			def localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
-			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
-			if (isLocalMavenRepoEnabled) {
-				def localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-				if (localMavenRepo != null) {
-					maven { url localMavenRepo }
+			jcenter {
+				mavenContent {
+					releasesOnly()
 				}
 			}
-			maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-			mavenCentral()
-			gradlePluginPortal()
+			String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+			if (isLocalMavenRepoEnabled) {
+				String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+				if (localMavenRepo != null) {
+					maven {
+						url = localMavenRepo
+						content {
+							includeGroup("com.jdroidtools")
+						}
+					}
+				}
+			}
+			maven {
+				url = "https://oss.sonatype.org/content/repositories/snapshots/"
+				content {
+					includeGroup("com.jdroidtools")
+				}
+				mavenContent {
+					snapshotsOnly()
+				}
+			}
+			mavenCentral() {
+				mavenContent {
+					releasesOnly()
+				}
+			}
+			maven {
+				url = "https://plugins.gradle.org/m2/"
+				content {
+					excludeGroup("com.jdroidtools")
+				}
+				mavenContent {
+					releasesOnly()
+				}
+			}
 		}
 	}
 
 	repositories {
-		jcenter()
-		def localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
-		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
-		if (isLocalMavenRepoEnabled) {
-			def localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-			if (localMavenRepo != null) {
-				maven { url localMavenRepo }
+		jcenter {
+			mavenContent {
+				releasesOnly()
 			}
 		}
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		mavenCentral()
+		String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+			if (localMavenRepo != null) {
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
+				}
+			}
+		}
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
 }
 
