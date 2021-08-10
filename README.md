@@ -2,23 +2,18 @@
 
 # Java Connector for GitHub API
 
-## Continuous Integration
-|Branch|Status|Workflows|Insights|
-| ------------- | ------------- | ------------- | ------------- |
-|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/master)|
-|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/production)|
-
 ## Setup 
 
-Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
+Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/dipien/github-api-java/releases/latest)
 
+```groovy
     repositories {
-      jcenter()
+        mavenCentral()
     }
-  
     dependencies {
-      implementation 'com.jdroidtools:jdroid-java-github:X.Y.Z'
+        classpath("com.dipien:github-api-java:X.Y.Z")
     }
+```
 
 ## Usage
 
