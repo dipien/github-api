@@ -125,15 +125,6 @@ jobs:
           path: ./build/reports/tests/test
           destination: tests
 
-  validatePlugins:
-    executor: jdk_executor
-    steps:
-      - custom_checkout
-      - attach_to_workspace
-      - run:
-          name: Validate plugins
-          command: ./gradlew validatePlugins --stacktrace
-
   publish:
     executor: jdk_executor
     steps:
@@ -171,9 +162,6 @@ jobs:
           name: Publish on Sonatype
           command: ./gradlew publish << pipeline.parameters.releaseGradleFlags >>
       - run:
-          name: Publish on Gradle Plugins Portal
-          command: ./gradlew publishPlugins -PGRADLE_PLUGIN_PORTAL_ENABLED=true << pipeline.parameters.releaseGradleFlags >>
-      - run:
           name: Close and Release Sonatype Repository
           command: ./gradlew closeAndReleaseRepository << pipeline.parameters.releaseGradleFlags >>
       - run:
@@ -198,9 +186,6 @@ workflows:
       - test:
           requires:
             - build
-      - validatePlugins:
-          requires:
-            - build
       - publish:
           filters:
             branches:
@@ -210,7 +195,6 @@ workflows:
           requires:
             - ktlint
             - test
-            - validatePlugins
             - security
   weekly:
     triggers:
