@@ -2,7 +2,7 @@
 
 version = '1.2.0'
 
-ext.GITHUB_REPOSITORY_NAME = 'jdroid-java-github'
+ext.GITHUB_REPOSITORY_NAME = 'github-api'
 
 apply plugin: "com.dipien.component.builder"
 apply plugin: 'com.jdroidtools.root'
