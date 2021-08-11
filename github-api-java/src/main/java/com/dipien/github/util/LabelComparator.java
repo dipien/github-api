@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.dipien.github.util;
 
-import com.jdroid.github.Label;
+import com.dipien.github.Label;
 
 import java.io.Serializable;
 import java.util.Comparator;

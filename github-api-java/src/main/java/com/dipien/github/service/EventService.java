@@ -11,23 +11,23 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
-import com.jdroid.github.event.Event;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
+import com.dipien.github.event.Event;
 
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_EVENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_NETWORKS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ORGS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_PUBLIC;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_RECEIVED_EVENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USERS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_EVENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_NETWORKS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ORGS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_PUBLIC;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_RECEIVED_EVENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USERS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Service class for interacting with Events

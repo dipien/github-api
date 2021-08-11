@@ -10,7 +10,7 @@
  *****************************************************************************/
 package com.dipien.github.util;
 
-import com.jdroid.github.Milestone;
+import com.dipien.github.Milestone;
 
 import java.io.Serializable;
 import java.util.Comparator;

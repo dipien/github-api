@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_UTF8;
 
 /**
  * Encodes and decodes to and from Base64 notation.

@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.dipien.github.client;
 
-import com.jdroid.github.util.UrlUtils;
+import com.dipien.github.util.UrlUtils;
 
 import java.lang.reflect.Type;
 import java.util.Map;

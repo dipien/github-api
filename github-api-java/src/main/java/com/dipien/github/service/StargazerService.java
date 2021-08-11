@@ -11,23 +11,23 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.Repository;
-import com.jdroid.github.User;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.Repository;
+import com.dipien.github.User;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_STARGAZERS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_STARRED;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USER;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USERS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_STARGAZERS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_STARRED;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USER;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USERS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Service class for dealing with users starring GitHub repositories.

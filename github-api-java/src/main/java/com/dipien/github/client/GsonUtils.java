@@ -12,7 +12,7 @@ package com.dipien.github.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jdroid.github.event.Event;
+import com.dipien.github.event.Event;
 
 import java.io.Reader;
 import java.lang.reflect.Type;

@@ -10,8 +10,8 @@
  *****************************************************************************/
 package com.dipien.github.client;
 
-import com.jdroid.github.IResourceProvider;
-import com.jdroid.github.util.UrlUtils;
+import com.dipien.github.IResourceProvider;
+import com.dipien.github.util.UrlUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static com.jdroid.github.client.IGitHubConstants.PARAM_PAGE;
+import static com.dipien.github.client.IGitHubConstants.PARAM_PAGE;
 
 /**
  * Iterator for getting paged responses. Each call to {@link #next()} will make

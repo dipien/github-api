@@ -11,18 +11,18 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.Label;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.Label;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ISSUES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LABELS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ISSUES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_LABELS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
 
 /**
  * Label service class for listing {@link Label} objects in use for a given

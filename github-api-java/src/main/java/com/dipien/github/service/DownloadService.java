@@ -11,14 +11,14 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Download;
-import com.jdroid.github.DownloadResource;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
-import com.jdroid.github.util.MultiPartUtils;
+import com.dipien.github.Download;
+import com.dipien.github.DownloadResource;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
+import com.dipien.github.util.MultiPartUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,10 +29,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_DOWNLOADS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_DOWNLOADS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 
 /**

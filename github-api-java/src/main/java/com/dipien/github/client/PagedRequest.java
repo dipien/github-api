@@ -10,10 +10,10 @@
  *******************************************************************************/
 package com.dipien.github.client;
 
-import com.jdroid.github.util.UrlUtils;
+import com.dipien.github.util.UrlUtils;
 
-import static com.jdroid.github.client.IGitHubConstants.PARAM_PAGE;
-import static com.jdroid.github.client.IGitHubConstants.PARAM_PER_PAGE;
+import static com.dipien.github.client.IGitHubConstants.PARAM_PAGE;
+import static com.dipien.github.client.IGitHubConstants.PARAM_PER_PAGE;
 
 /**
  * Paged request class that contains the initial page size and page number of

@@ -10,16 +10,16 @@
  *******************************************************************************/
 package com.dipien.github.client;
 
-import com.jdroid.github.FieldError;
-import com.jdroid.github.RequestError;
+import com.dipien.github.FieldError;
+import com.dipien.github.RequestError;
 
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 
-import static com.jdroid.github.FieldError.CODE_ALREADY_EXISTS;
-import static com.jdroid.github.FieldError.CODE_INVALID;
-import static com.jdroid.github.FieldError.CODE_MISSING_FIELD;
+import static com.dipien.github.FieldError.CODE_ALREADY_EXISTS;
+import static com.dipien.github.FieldError.CODE_INVALID;
+import static com.dipien.github.FieldError.CODE_MISSING_FIELD;
 
 /**
  * Request exception class that wraps a {@link RequestError} object.

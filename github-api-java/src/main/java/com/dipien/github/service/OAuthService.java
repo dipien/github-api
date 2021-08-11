@@ -11,10 +11,10 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Authorization;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.Authorization;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_AUTHORIZATIONS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_AUTHORIZATIONS;
 
 /**
  * Service for interacting with a user's OAUth authorizations

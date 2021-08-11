@@ -13,25 +13,25 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.Repository;
-import com.jdroid.github.Team;
-import com.jdroid.github.TeamMembership;
-import com.jdroid.github.User;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.Repository;
+import com.dipien.github.Team;
+import com.dipien.github.TeamMembership;
+import com.dipien.github.User;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_MEMBERS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_MEMBERSHIPS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ORGS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_TEAMS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_MEMBERS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_MEMBERSHIPS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ORGS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_TEAMS;
 
 /**
  * Service class for working with organization teams

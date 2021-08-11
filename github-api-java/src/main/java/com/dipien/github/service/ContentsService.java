@@ -11,18 +11,18 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.RepositoryContents;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.RepositoryContents;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_CONTENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_README;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_CONTENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_README;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
 
 /**
  * Service for accessing repository contents

@@ -10,14 +10,14 @@
  *******************************************************************************/
 package com.dipien.github.client;
 
-import static com.jdroid.github.client.IGitHubConstants.HEADER_LAST;
-import static com.jdroid.github.client.IGitHubConstants.HEADER_LINK;
-import static com.jdroid.github.client.IGitHubConstants.HEADER_NEXT;
-import static com.jdroid.github.client.IGitHubConstants.META_FIRST;
-import static com.jdroid.github.client.IGitHubConstants.META_LAST;
-import static com.jdroid.github.client.IGitHubConstants.META_NEXT;
-import static com.jdroid.github.client.IGitHubConstants.META_PREV;
-import static com.jdroid.github.client.IGitHubConstants.META_REL;
+import static com.dipien.github.client.IGitHubConstants.HEADER_LAST;
+import static com.dipien.github.client.IGitHubConstants.HEADER_LINK;
+import static com.dipien.github.client.IGitHubConstants.HEADER_NEXT;
+import static com.dipien.github.client.IGitHubConstants.META_FIRST;
+import static com.dipien.github.client.IGitHubConstants.META_LAST;
+import static com.dipien.github.client.IGitHubConstants.META_NEXT;
+import static com.dipien.github.client.IGitHubConstants.META_PREV;
+import static com.dipien.github.client.IGitHubConstants.META_REL;
 
 /**
  * Page link class to be used to determine the links to other pages of request

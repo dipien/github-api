@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.dipien.github.event;
 
-import com.jdroid.github.Release;
+import com.dipien.github.Release;
 
 import java.io.Serializable;
 

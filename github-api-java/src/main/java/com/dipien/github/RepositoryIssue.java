@@ -10,7 +10,7 @@
  *****************************************************************************/
 package com.dipien.github;
 
-import com.jdroid.github.service.IssueService;
+import com.dipien.github.service.IssueService;
 
 /**
  * Extension of {@link Issue} that includes the {@link Repository} that the

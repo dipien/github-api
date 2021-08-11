@@ -11,20 +11,20 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Comment;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.IResourceProvider;
-import com.jdroid.github.Issue;
-import com.jdroid.github.IssueEvent;
-import com.jdroid.github.Label;
-import com.jdroid.github.Milestone;
-import com.jdroid.github.RepositoryIssue;
-import com.jdroid.github.SearchIssue;
-import com.jdroid.github.User;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.Comment;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.IResourceProvider;
+import com.dipien.github.Issue;
+import com.dipien.github.IssueEvent;
+import com.dipien.github.Label;
+import com.dipien.github.Milestone;
+import com.dipien.github.RepositoryIssue;
+import com.dipien.github.SearchIssue;
+import com.dipien.github.User;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -33,16 +33,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ASSIGNEES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_EVENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ISSUES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LEGACY;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_SEARCH;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ASSIGNEES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_COMMENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_EVENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ISSUES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_LEGACY;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_SEARCH;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Issue service class for listing, searching, and fetching {@link Issue}

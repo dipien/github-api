@@ -11,24 +11,24 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Key;
-import com.jdroid.github.User;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.Key;
+import com.dipien.github.User;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_EMAILS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_FOLLOWERS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_FOLLOWING;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_KEYS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USER;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USERS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_EMAILS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_FOLLOWERS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_FOLLOWING;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_KEYS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USER;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USERS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * User service class.

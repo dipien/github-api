@@ -25,9 +25,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static com.jdroid.github.client.IGitHubConstants.DATE_FORMAT;
-import static com.jdroid.github.client.IGitHubConstants.DATE_FORMAT_V2_1;
-import static com.jdroid.github.client.IGitHubConstants.DATE_FORMAT_V2_2;
+import static com.dipien.github.client.IGitHubConstants.DATE_FORMAT;
+import static com.dipien.github.client.IGitHubConstants.DATE_FORMAT_V2_1;
+import static com.dipien.github.client.IGitHubConstants.DATE_FORMAT_V2_2;
 
 /**
  * Formatter for date formats present in the GitHub v2 and v3 API.

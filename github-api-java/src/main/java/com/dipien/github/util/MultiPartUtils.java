@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_UTF8;
 
 /**
  * Utilities for writing multiple HTTP requests

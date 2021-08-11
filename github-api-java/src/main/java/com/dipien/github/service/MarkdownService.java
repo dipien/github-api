@@ -10,8 +10,8 @@
  *****************************************************************************/
 package com.dipien.github.service;
 
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.client.GitHubClient;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.client.GitHubClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_MARKDOWN;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_MARKDOWN;
 
 /**
  * Service to request Markdown text to be rendered as HTML

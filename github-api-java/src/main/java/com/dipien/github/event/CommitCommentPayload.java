@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.dipien.github.event;
 
-import com.jdroid.github.CommitComment;
+import com.dipien.github.CommitComment;
 
 import java.io.Serializable;
 

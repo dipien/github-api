@@ -11,8 +11,8 @@
 package com.dipien.github.event;
 
 import com.google.gson.annotations.SerializedName;
-import com.jdroid.github.User;
-import com.jdroid.github.util.DateUtils;
+import com.dipien.github.User;
+import com.dipien.github.util.DateUtils;
 
 import java.io.Serializable;
 import java.util.Date;

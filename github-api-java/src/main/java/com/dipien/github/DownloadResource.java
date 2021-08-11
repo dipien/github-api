@@ -10,7 +10,7 @@
  *****************************************************************************/
 package com.dipien.github;
 
-import com.jdroid.github.util.DateUtils;
+import com.dipien.github.util.DateUtils;
 
 import java.util.Date;
 

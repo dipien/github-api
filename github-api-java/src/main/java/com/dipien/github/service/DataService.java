@@ -11,18 +11,18 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Blob;
-import com.jdroid.github.Commit;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.Reference;
-import com.jdroid.github.ShaResource;
-import com.jdroid.github.Tag;
-import com.jdroid.github.Tree;
-import com.jdroid.github.TreeEntry;
-import com.jdroid.github.TypedResource;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.Blob;
+import com.dipien.github.Commit;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.Reference;
+import com.dipien.github.ShaResource;
+import com.dipien.github.Tag;
+import com.dipien.github.Tree;
+import com.dipien.github.TreeEntry;
+import com.dipien.github.TypedResource;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,13 +32,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_BLOBS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMITS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_GIT;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REFS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_TAGS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_TREES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_BLOBS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_COMMITS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_GIT;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REFS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_TAGS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_TREES;
 
 /**
  * Data service class for low-level access to Git repository data.

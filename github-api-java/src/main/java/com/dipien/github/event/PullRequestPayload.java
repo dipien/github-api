@@ -11,7 +11,7 @@
 
 package com.dipien.github.event;
 
-import com.jdroid.github.PullRequest;
+import com.dipien.github.PullRequest;
 
 import java.io.Serializable;
 

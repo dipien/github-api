@@ -10,20 +10,20 @@
  *******************************************************************************/
 package com.dipien.github.service;
 
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.NoSuchPageException;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
-import com.jdroid.github.client.RequestException;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.NoSuchPageException;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
+import com.dipien.github.client.RequestException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 
 /**

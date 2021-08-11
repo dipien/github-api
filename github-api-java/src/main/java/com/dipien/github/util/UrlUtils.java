@@ -10,7 +10,7 @@
  *****************************************************************************/
 package com.dipien.github.util;
 
-import com.jdroid.github.IRepositoryIdProvider;
+import com.dipien.github.IRepositoryIdProvider;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -19,9 +19,9 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_ISO_8859_1;
-import static com.jdroid.github.client.IGitHubConstants.HOST_DEFAULT;
-import static com.jdroid.github.client.IGitHubConstants.SUFFIX_GIT;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_ISO_8859_1;
+import static com.dipien.github.client.IGitHubConstants.HOST_DEFAULT;
+import static com.dipien.github.client.IGitHubConstants.SUFFIX_GIT;
 
 /**
  * URL utilities

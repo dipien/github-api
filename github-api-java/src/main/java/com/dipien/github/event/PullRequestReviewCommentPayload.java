@@ -10,8 +10,8 @@
  *****************************************************************************/
 package com.dipien.github.event;
 
-import com.jdroid.github.CommitComment;
-import com.jdroid.github.PullRequest;
+import com.dipien.github.CommitComment;
+import com.dipien.github.PullRequest;
 
 import java.io.Serializable;
 

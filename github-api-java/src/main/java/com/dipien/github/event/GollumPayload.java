@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.dipien.github.event;
 
-import com.jdroid.github.GollumPage;
+import com.dipien.github.GollumPage;
 
 import java.io.Serializable;
 import java.util.List;

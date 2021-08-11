@@ -11,19 +11,19 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.Contributor;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.IResourceProvider;
-import com.jdroid.github.Repository;
-import com.jdroid.github.RepositoryBranch;
-import com.jdroid.github.RepositoryHook;
-import com.jdroid.github.RepositoryId;
-import com.jdroid.github.RepositoryTag;
-import com.jdroid.github.SearchRepository;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.Contributor;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.IResourceProvider;
+import com.dipien.github.Repository;
+import com.dipien.github.RepositoryBranch;
+import com.dipien.github.RepositoryHook;
+import com.dipien.github.RepositoryId;
+import com.dipien.github.RepositoryTag;
+import com.dipien.github.SearchRepository;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -33,25 +33,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static com.jdroid.github.client.IGitHubConstants.CHARSET_UTF8;
-import static com.jdroid.github.client.IGitHubConstants.PARAM_LANGUAGE;
-import static com.jdroid.github.client.IGitHubConstants.PARAM_START_PAGE;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_BRANCHES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_CONTRIBUTORS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_FORKS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_HOOKS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LANGUAGES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_LEGACY;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_ORGS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOSITORIES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_SEARCH;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_TAGS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_TEST;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USER;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_USERS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.CHARSET_UTF8;
+import static com.dipien.github.client.IGitHubConstants.PARAM_LANGUAGE;
+import static com.dipien.github.client.IGitHubConstants.PARAM_START_PAGE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_BRANCHES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_CONTRIBUTORS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_FORKS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_HOOKS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_LANGUAGES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_LEGACY;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_ORGS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOSITORIES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_SEARCH;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_TAGS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_TEST;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USER;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_USERS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Repository service class.

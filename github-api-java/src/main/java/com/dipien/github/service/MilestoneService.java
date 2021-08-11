@@ -11,18 +11,18 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.Milestone;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.Milestone;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_MILESTONES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_MILESTONES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
 
 /**
  * Milestone service class for listing the {@link Milestone} objects in use by a

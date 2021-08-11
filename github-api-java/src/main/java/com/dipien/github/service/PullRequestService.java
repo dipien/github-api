@@ -11,16 +11,16 @@
 package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
-import com.jdroid.github.CommitComment;
-import com.jdroid.github.CommitFile;
-import com.jdroid.github.IRepositoryIdProvider;
-import com.jdroid.github.MergeStatus;
-import com.jdroid.github.PullRequest;
-import com.jdroid.github.RepositoryCommit;
-import com.jdroid.github.client.GitHubClient;
-import com.jdroid.github.client.GitHubRequest;
-import com.jdroid.github.client.PageIterator;
-import com.jdroid.github.client.PagedRequest;
+import com.dipien.github.CommitComment;
+import com.dipien.github.CommitFile;
+import com.dipien.github.IRepositoryIdProvider;
+import com.dipien.github.MergeStatus;
+import com.dipien.github.PullRequest;
+import com.dipien.github.RepositoryCommit;
+import com.dipien.github.client.GitHubClient;
+import com.dipien.github.client.GitHubRequest;
+import com.dipien.github.client.PageIterator;
+import com.dipien.github.client.PagedRequest;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -28,14 +28,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMENTS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_COMMITS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_FILES;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_MERGE;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_PULLS;
-import static com.jdroid.github.client.IGitHubConstants.SEGMENT_REPOS;
-import static com.jdroid.github.client.PagedRequest.PAGE_FIRST;
-import static com.jdroid.github.client.PagedRequest.PAGE_SIZE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_COMMENTS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_COMMITS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_FILES;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_MERGE;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_PULLS;
+import static com.dipien.github.client.IGitHubConstants.SEGMENT_REPOS;
+import static com.dipien.github.client.PagedRequest.PAGE_FIRST;
+import static com.dipien.github.client.PagedRequest.PAGE_SIZE;
 
 /**
  * Service class for creating, updating, getting, and listing pull requests as

@@ -1,8 +1,8 @@
 package com.dipien.github.service
 
-import com.jdroid.github.IRepositoryIdProvider
-import com.jdroid.github.client.GitHubClient
-import com.jdroid.github.client.IGitHubConstants
+import com.dipien.github.IRepositoryIdProvider
+import com.dipien.github.client.GitHubClient
+import com.dipien.github.client.IGitHubConstants
 
 // https://developer.github.com/v3/pulls/review_requests/
 class ReviewRequestsService : GitHubService {
