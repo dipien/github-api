@@ -1,10 +1,11 @@
 [![Dipien](https://raw.githubusercontent.com/dipien/dipien-component-builder/master/.github/dipien_logo.png)](http://www.dipien.com)
 
-# Java Connector for GitHub API
+# GitHub API
+Java Connector for GitHub API
 
 ## Setup 
 
-Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/dipien/github-api-java/releases/latest)
+Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/dipien/github-api/releases/latest)
 
 ```groovy
     repositories {
