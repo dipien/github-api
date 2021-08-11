@@ -4,7 +4,7 @@
 //  http://iharder.sourceforge.net/current/java/base64/
 //
 
-package com.jdroid.github.util;
+package com.dipien.github.util;
 
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;

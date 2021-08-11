@@ -8,7 +8,7 @@
  *  Contributors:
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *****************************************************************************/
-package com.jdroid.github.event;
+package com.dipien.github.event;
 
 import java.io.Serializable;
 

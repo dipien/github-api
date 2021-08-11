@@ -8,7 +8,7 @@
  * Contributors:
  *    Jon Ander Peñalba - initial API and implementation
  *******************************************************************************/
-package com.jdroid.github.event;
+package com.dipien.github.event;
 
 import com.jdroid.github.Release;
 

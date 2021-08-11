@@ -8,7 +8,7 @@
  *  Contributors:
  *    Jason Tsay (GitHub Inc.) - initial API and implementation
  *******************************************************************************/
-package com.jdroid.github.client;
+package com.dipien.github.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -8,7 +8,7 @@
  * Contributors:
  *    Jon Ander Peñalba - initial API and implementation
  *******************************************************************************/
-package com.jdroid.github;
+package com.dipien.github;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package com.jdroid.github.service;
+package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.jdroid.github.IRepositoryIdProvider;

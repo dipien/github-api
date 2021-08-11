@@ -8,7 +8,7 @@
  *  Contributors:
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *****************************************************************************/
-package com.jdroid.github.util;
+package com.dipien.github.util;
 
 import java.io.UnsupportedEncodingException;
 

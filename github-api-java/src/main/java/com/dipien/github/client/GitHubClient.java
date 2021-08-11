@@ -9,7 +9,7 @@
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *    Christian Trutz             - HttpClient 4.1
  *******************************************************************************/
-package com.jdroid.github.client;
+package com.dipien.github.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;

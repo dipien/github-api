@@ -8,7 +8,7 @@
  *  Contributors:
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *****************************************************************************/
-package com.jdroid.github.service;
+package com.dipien.github.service;
 
 import com.jdroid.github.IRepositoryIdProvider;
 import com.jdroid.github.client.GitHubClient;

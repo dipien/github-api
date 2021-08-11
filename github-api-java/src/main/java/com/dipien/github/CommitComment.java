@@ -8,7 +8,7 @@
  *  Contributors:
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *****************************************************************************/
-package com.jdroid.github;
+package com.dipien.github;
 
 /**
  * Commit comment model class.

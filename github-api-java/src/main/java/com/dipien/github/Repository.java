@@ -8,7 +8,7 @@
  *  Contributors:
  *    Kevin Sawicki (GitHub Inc.) - initial API and implementation
  *****************************************************************************/
-package com.jdroid.github;
+package com.dipien.github;
 
 import com.google.gson.annotations.SerializedName;
 import com.jdroid.github.util.DateUtils;

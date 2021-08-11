@@ -1,4 +1,4 @@
-package com.jdroid.github.service
+package com.dipien.github.service
 
 import com.jdroid.github.IRepositoryIdProvider
 import com.jdroid.github.client.GitHubClient

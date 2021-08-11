@@ -10,7 +10,7 @@
  *    Michael Mathews (Arizona Board of Regents) - (Bug: 447419)
  *    			 Team Membership API implementation
  *****************************************************************************/
-package com.jdroid.github.service;
+package com.dipien.github.service;
 
 import com.google.gson.reflect.TypeToken;
 import com.jdroid.github.IRepositoryIdProvider;
