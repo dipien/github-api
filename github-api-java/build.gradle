@@ -2,9 +2,6 @@ ext.PROJECT_NAME = "Java GitHub API Client"
 description = "Java GitHub API Client"
 ext.ARTIFACT_ID = "github-api-java"
 
-// TODO Remove this once dipien-component-builder is setting it to true
-ext.JAVADOC_PUBLICATION_ENABLED = true
-
 apply plugin: 'com.jdroidtools.java.library'
 
 buildscript {
