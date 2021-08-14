@@ -35,13 +35,14 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
 	ReleaseService releaseService = new ReleaseService(client);
 	releaseService.createRelease(repositoryIdProvider, release);
 
-## Donations
+## Sponsor this project
 
-Donations are greatly appreciated. You can help us to pay for our domain and this project development.
+Sponsor this open source project to help us get the funding we need to continue working on it.
 
 * [Donate cryptocurrency](http://coinbase.dipien.com/)
 * [Donate with PayPal](http://paypal.dipien.com/)
 * [Donate on Patreon](http://patreon.dipien.com/)
+* [Become a member of Medium](https://maxirosson.medium.com/membership) [We will receive a portion of your membership fee]
 
 ## Follow us
 * [Twitter](http://twitter.dipien.com)
@@ -49,4 +50,3 @@ Donations are greatly appreciated. You can help us to pay for our domain and thi
 * [Instagram](http://instagram.dipien.com)
 * [Pinterest](http://pinterest.dipien.com)
 * [GitHub](http://github.dipien.com)
-* [Blog](http://blog.dipien.com)
