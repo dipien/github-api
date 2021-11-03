@@ -1,0 +1,15 @@
+ext.PROJECT_NAME = "Java GitHub API Client"
+description = "Java GitHub API Client"
+ext.ARTIFACT_ID = "github-api-java"
+
+apply plugin: 'com.jdroidtools.java.library'
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+	implementation(Libs.GSON)
+}

@@ -1,22 +1,20 @@
-# Java Connector for GitHub API
+[![Dipien](https://raw.githubusercontent.com/dipien/dipien-component-builder/master/.github/dipien_logo.png)](http://www.dipien.com)
 
-## Continuous Integration
-|Branch|Status|Workflows|Insights|
-| ------------- | ------------- | ------------- | ------------- |
-|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/master)|
-|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java-github/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java-github/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java-github/production)|
+# GitHub API
+Java Connector for GitHub API
 
 ## Setup 
 
-Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java-github/releases/latest)
+Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [latest version](https://github.com/dipien/github-api/releases/latest)
 
+```groovy
     repositories {
-      jcenter()
+        mavenCentral()
     }
-  
     dependencies {
-      implementation 'com.jdroidtools:jdroid-java-github:X.Y.Z'
+        classpath("com.dipien:github-api-java:X.Y.Z")
     }
+```
 
 ## Usage
 
@@ -36,8 +34,19 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
 
 	ReleaseService releaseService = new ReleaseService(client);
 	releaseService.createRelease(repositoryIdProvider, release);
-    
-## Donations
-Help us to continue with this project:
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2UEBTRTSCYA9L)
+## Sponsor this project
+
+Sponsor this open source project to help us get the funding we need to continue working on it.
+
+* [Donate cryptocurrency](http://coinbase.dipien.com/)
+* [Donate with PayPal](http://paypal.dipien.com/)
+* [Donate on Patreon](http://patreon.dipien.com/)
+* [Become a member of Medium](https://maxirosson.medium.com/membership) [We will receive a portion of your membership fee]
+
+## Follow us
+* [Twitter](http://twitter.dipien.com)
+* [Medium](http://medium.dipien.com)
+* [Instagram](http://instagram.dipien.com)
+* [Pinterest](http://pinterest.dipien.com)
+* [GitHub](http://github.dipien.com)

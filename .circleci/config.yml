@@ -1,118 +1,136 @@
-version: 2
+version: 2.1
+
+parameters:
+
+  api:
+    type: boolean
+    default: false
 
 references:
 
-  ## Workspace
+  working_dir: &working_dir
+                 ~/project
 
-  workspace: &workspace
-               ~/workspace
-
-  ## Cache
-
-  cache_key: &cache_key
-    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}
-  restore_cache: &restore_cache
-    restore_cache:
-      <<: *cache_key
-  save_cache: &save_cache
-    save_cache:
-      <<: *cache_key
-      paths:
-        - ~/.gradle
-        - ~/.m2
-
-  ## Docker image configurations
-
-  jdk_config: &jdk_config
-    working_directory: *workspace
+executors:
+  jdk_executor:
+    working_directory: *working_dir
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/openjdk:11.0
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     environment:
       JVM_OPTS: -Xmx3200m
-      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=false
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=true
+
+orbs:
+  # https://circleci.com/developer/orbs/orb/eddiewebb/queue
+  queue: eddiewebb/queue@1.5.0
+
+commands:
+
+  attach_to_workspace:
+    steps:
+      - attach_workspace:
+          at: ~/
+
+  persist_gradle_build_cache:
+    steps:
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - gradle-build-cache
+
+  custom_checkout:
+    parameters:
+      switchToGradleBinaryDistributionEnabled:
+        type: boolean
+        default: true
+    steps:
+      - checkout
+      - when:
+          condition: << parameters.switchToGradleBinaryDistributionEnabled >>
+          steps:
+            - run:
+                name: Switch to Gradle Binary Distribution
+                command: sed -i -e 's/-all.zip/-bin.zip/' gradle/wrapper/gradle-wrapper.properties
 
 jobs:
-  build:
-    <<: *jdk_config
-    steps:
-      - checkout
-
-      - *restore_cache
-      - run:
-          name: Download dependencies
-          command: ./gradlew dependencies --refresh-dependencies --stacktrace
-      - *save_cache
-
-      - run:
-          name: Assembling
-          command: ./gradlew assemble --refresh-dependencies --stacktrace --scan
-
-      - run:
-          name: Saving jars
-          command: |
-            mkdir -p ~/jars/
-            find . -type f -regex ".*/build/libs/.*jar" -exec cp {} ~/jars/ \;
-          when: always
-
-      - store_artifacts:
-          path: ~/jars
-          destination: jars
 
   ktlint:
-    <<: *jdk_config
+    executor: jdk_executor
     steps:
-      - checkout
-      - run: ./gradlew ktlint --stacktrace
+      - custom_checkout
+      - run:
+          name: Ktlint
+          command: ./gradlew ktlint --stacktrace
+
+  security:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - run:
+          name: Verify the integrity of the Gradle Wrapper JAR
+          command: |
+            # https://docs.gradle.org/current/userguide/gradle_wrapper.html#wrapper_checksum_verification
+            cd gradle/wrapper
+            gradleVersion=$(grep "distributionUrl" gradle-wrapper.properties | grep -Po "(\d+\.)+\d+")
+            curl --location --output gradle-wrapper.jar.sha256 https://services.gradle.org/distributions/gradle-${gradleVersion}-wrapper.jar.sha256
+            echo "  gradle-wrapper.jar" >> gradle-wrapper.jar.sha256
+            sha256sum --check gradle-wrapper.jar.sha256
+
+  build:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - attach_to_workspace
+      - run:
+          name: Assemble
+          command: ./gradlew assemble --stacktrace
+      - persist_gradle_build_cache
+      - store_artifacts:
+          path: ./build/libs
+          destination: jars
 
   test:
-    <<: *jdk_config
+    executor: jdk_executor
     steps:
-      - checkout
-      - *restore_cache
-
+      - custom_checkout
+      - attach_to_workspace
       - run:
-          name: Verifying
+          name: Run tests
           command: ./gradlew test --stacktrace
-
       - run:
-          name: Saving test results
+          name: Save test results
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
           when: always
       - store_test_results:
           path: ~/junit
-
       - store_artifacts:
           path: ./build/reports/tests/test
           destination: tests
 
   publish:
-    <<: *jdk_config
+    executor: jdk_executor
     steps:
-      - checkout
-      - *restore_cache
-
+      - custom_checkout
+      - attach_to_workspace
+      - queue/until_front_of_line:
+          block-workflow: true
+          only-on-branch: master
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew publish -PLOCAL_UPLOAD=false --stacktrace
-
-  upgradeDependencies:
-    <<: *jdk_config
-    steps:
-      - checkout
-      - run:
-          name: Upgrade Dependencies
-          command: ./gradlew upgradeDependencies -PpullRequestEnabled=true --stacktrace
+          command: ./gradlew publish -PLOCAL_UPLOAD=false --refresh-dependencies --stacktrace
 
 workflows:
-  version: 2
   commit:
+    unless: << pipeline.parameters.api >>
     jobs:
+      - security
       - ktlint
-      - build:
-          requires:
-            - ktlint
+      - build
       - test:
           requires:
             - build
@@ -121,15 +139,8 @@ workflows:
             branches:
               only:
                 - master
+                - production
           requires:
+            - ktlint
             - test
-  weekly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * 0"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - upgradeDependencies
+            - security
