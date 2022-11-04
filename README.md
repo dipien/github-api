@@ -39,6 +39,7 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
 
 Sponsor this open source project to help us get the funding we need to continue working on it.
 
+* [Donate with Bitcoin Lightning](http://alby.dipien.com)
 * [Donate cryptocurrency](http://coinbase.dipien.com/)
 * [Donate with PayPal](http://paypal.dipien.com/)
 * [Donate on Patreon](http://patreon.dipien.com/)
