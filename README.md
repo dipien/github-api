@@ -1,4 +1,4 @@
-[![Dipien](https://raw.githubusercontent.com/dipien/dipien-component-builder/master/.github/dipien_logo.png)](http://www.dipien.com)
+[![Dipien](https://raw.githubusercontent.com/dipien/dipien-component-builder/master/.github/dipien_logo.png)](https://medium.com/dipien)
 
 # GitHub API
 Java Connector for GitHub API
@@ -34,24 +34,3 @@ Add the following configuration to your `build.gradle`, replacing X.Y.Z by the [
 
 	ReleaseService releaseService = new ReleaseService(client);
 	releaseService.createRelease(repositoryIdProvider, release);
-
-## Sponsor this project
-
-Sponsor this open source project to help us get the funding we need to continue working on it.
-
-* [Donate with Bitcoin Lightning](https://getalby.com/p/dipien) ⚡️ [dipien@getalby.com](https://getalby.com/p/dipien)
-* [Donate cryptocurrency](http://coinbase.dipien.com/)
-* [Donate with PayPal](http://paypal.dipien.com/)
-* [Donate on Patreon](http://patreon.dipien.com/)
-* [Become a member of Medium](https://maxirosson.medium.com/membership) [We will receive a portion of your membership fee]
-
-You can donate BTC (lightning), using this QR:
-
-![BTC](https://raw.githubusercontent.com/dipien/dipien-component-builder/master/.github/btc_lightning.png)
-
-## Follow us
-* [Twitter](http://twitter.dipien.com)
-* [Medium](http://medium.dipien.com)
-* [Instagram](http://instagram.dipien.com)
-* [Pinterest](http://pinterest.dipien.com)
-* [GitHub](http://github.dipien.com)
